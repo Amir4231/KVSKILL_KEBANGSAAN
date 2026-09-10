@@ -79,7 +79,36 @@ ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
 <tr><td>Submit</td><td>C:\xampp\htdocs\YOUR_IC_Module_C (folder name uses competitor IC)</td></tr>
 </table>
 <hr class="sec">
-<!-- TASK2: sections s1+s2 -->
+<section id="s1"><h2>1. Mission and scope</h2>
+<p>Build a server-side photo-report application, folder <span class="mono">CompetitorID_Module_C</span>, where registered users create one-page event reports, upload photos, and share them for others to view. Design marks are minimal (C10 = 3.00); backend behavior carries the grade.</p>
+<div class="scroll"><table class="spec"><tr><th>Screen</th><th>Route</th><th>Access</th><th>Gradable rule</th></tr>
+<tr><td>Index | Login</td><td class="mono">/ + POST /login</td><td>Guest</td><td>All fields required; role 0&rarr;/reports, role 1&rarr;/users; error <i>Username and password not matched.</i></td></tr>
+<tr><td>Register</td><td class="mono">/register</td><td>Guest</td><td>All required; password==confirm; username unique; kategori dropdown from categories table</td></tr>
+<tr><td>One Page Report</td><td class="mono">/reports</td><td>User</td><td>Public (status 0) and non-empty only; first photo = square thumb; title + owner</td></tr>
+<tr><td>Report / Slide</td><td class="mono">/reports/{id}</td><td>User</td><td>Meta top, big photo middle, thumbs + Prev/Next + count bottom; JavaScript, no reload</td></tr>
+<tr><td>My Reports</td><td class="mono">/my-reports</td><td>Owner</td><td>Only mine; empty = grey box; X deletes; + modal &rarr; /manage/{newId}</td></tr>
+<tr><td>Manage Report</td><td class="mono">/manage/{id}</td><td>Owner</td><td>Top form (title/desc/date/status; kategori text-only); bottom AJAX photos, 600 max, drag-drop, fullscreen</td></tr>
+<tr><td>Users</td><td class="mono">/users</td><td>Admin</td><td>Username | kategori | reports count | photos count | Delete cascade</td></tr>
+<tr><td>Logout</td><td class="mono">/logout</td><td>Auth</td><td>No UI; flush session &rarr; /</td></tr>
+</table></div>
+<div class="fig"><b>Figure C3&ndash;C5.</b> Navigation states. Before login: Index | Register. User: One Page Report | My Reports | Logout + username right. Admin: User | Logout + Admin right. Every page carries header + nav + main + footer.<div class="cap">Layout contract (C1/C10). Username displayed top-right after login.</div></div>
+</section>
+<section id="s2"><h2>2. Marking scheme C1&ndash;C10 (total 50.00)</h2>
+<p>Attack order: secure C8, C3, C6, C5 first (29.75 combined); C2 comes first chronologically because everything depends on it.</p>
+<div class="scroll"><table class="spec"><tr><th>Sec</th><th>Criterion</th><th class="num">Max</th><th class="num">%</th></tr>
+<tr><td>C8</td><td>Report Photos (bottom): AJAX upload, drag-drop + highlight, 600&times;600 resize, list append, fullscreen, delete</td><td class="num">8.50</td><td class="num">17.0</td></tr>
+<tr><td>C3</td><td>Authentication: login/logout/register, validation, hashing, redirects, nav</td><td class="num">7.50</td><td class="num">15.0</td></tr>
+<tr><td>C6</td><td>MyReport page: list mine, grey empty, X delete, + modal with validation</td><td class="num">7.25</td><td class="num">14.5</td></tr>
+<tr><td>C5</td><td>Slide page: meta, big photo, thumbs, Prev/Next, highlight, count, no reload</td><td class="num">6.50</td><td class="num">13.0</td></tr>
+<tr><td>C2</td><td>Database: 4 tables, keys, seed Admin/Alice/Bob + categories</td><td class="num">5.25</td><td class="num">10.5</td></tr>
+<tr><td>C4</td><td>One Page Report: public + non-empty, first-photo thumb, title + owner, click&rarr;slide</td><td class="num">3.50</td><td class="num">7.0</td></tr>
+<tr><td>C7</td><td>Report Information (top): load, validate, kategori text, Update&rarr;my-reports, Reset</td><td class="num">3.50</td><td class="num">7.0</td></tr>
+<tr><td>C9</td><td>Users page: aggregate reports/photos counts, delete cascade</td><td class="num">3.00</td><td class="num">6.0</td></tr>
+<tr><td>C10</td><td>Design and layout: clean header/nav/main/footer, smooth UX</td><td class="num">3.00</td><td class="num">6.0</td></tr>
+<tr><td>C1</td><td>Structure: CompetitorID_Module_C folder, Laravel 12 layout</td><td class="num">2.00</td><td class="num">4.0</td></tr>
+</table></div>
+</section>
+<hr class="sec">
 <!-- TASK3: sections s3+s4+s5 -->
 <!-- TASK4: sections s6+s7+appendix+references+script -->
 </div>
