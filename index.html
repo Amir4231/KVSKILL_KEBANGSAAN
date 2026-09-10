@@ -109,7 +109,76 @@ ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
 </table></div>
 </section>
 <hr class="sec">
-<!-- TASK3: sections s3+s4+s5 -->
+<section id="s3"><h2>3. Environment and setup</h2>
+<p>XAMPP Apache + MySQL green; create database <span class="mono">kvskill</span> (<span class="mono">utf8mb4_unicode_ci</span>, root / blank). Do not run <span class="mono">composer create-project</span> (pre-downloaded Laravel, no network). Unzip media files to Desktop for upload tests.</p>
+<details class="src"><summary>.env — 7 lines (DB + session)</summary><pre><code>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kvskill
+DB_USERNAME=root
+DB_PASSWORD=
+SESSION_DRIVER=file</code></pre></details>
+<p>Then <span class="mono">php artisan key:generate</span>; create <span class="mono">public/uploads</span>; serve with <span class="mono">php artisan serve</span> (http://127.0.0.1:8000). Verify PHP 8.2+ and Laravel 12.x via <span class="mono">php --version</span> / <span class="mono">php artisan --version</span>.</p>
+</section>
+<section id="s4"><h2>4. Database design</h2>
+<div class="fig"><b>Note.</b> The paper omits <span class="mono">status</span> in Reports but later pages require it. Add <span class="mono">status tinyint default 0</span> (0 public, 1 private) or lose C6/C7 marks.<div class="cap">Schema anomaly, confirmed against modal and manage requirements.</div></div>
+<div class="scroll"><table class="spec"><tr><th>Table</th><th>Columns</th><th>Keys / rule</th></tr>
+<tr><td class="mono">categories</td><td>id; category_name varchar(255)</td><td>PK id; seed Web Technology, Patisserie and Confectionery (+ categoris.csv)</td></tr>
+<tr><td class="mono">users</td><td>id; username unique; password hashed; role; category_id nullable FK</td><td>role 0 user / 1 admin; category nullOnDelete; seed 1 Admin/1, 2 Alice/0, 3 Bob/0, password = password</td></tr>
+<tr><td class="mono">reports</td><td>id; user_id FK; category_id nullable FK; title 255; description 255; date; status default 0</td><td>user_id cascade; category nullOnDelete; title/desc/date required; status in 0,1</td></tr>
+<tr><td class="mono">photos</td><td>id; report_id FK; path varchar(255)</td><td>report_id cascade; path e.g. uploads/xxx.jpg</td></tr>
+</table></div>
+<p>Cascade deletes (user&rarr;reports&rarr;photos) satisfy delete requirements without extra code; physical files still unlinked manually.</p>
+<details class="src"><summary>migrations — 4 × up() (~45 lines)</summary><pre><code>php artisan make:migration create_categories_table
+php artisan make:migration create_users_table
+php artisan make:migration create_reports_table
+php artisan make:migration create_photos_table
+// categories: id; string category_name 255; timestamps
+// users: id; username unique; password; tinyInteger role default 0;
+//   foreignId category_id nullable -&gt; constrained categories nullOnDelete; timestamps
+// reports: id; foreignId user_id -&gt; users cascade;
+//   foreignId category_id nullable -&gt; categories nullOnDelete;
+//   title 255; description 255; date; tinyInteger status default 0; timestamps
+// photos: id; foreignId report_id -&gt; reports cascade; path 255; timestamps
+php artisan migrate</code></pre></details>
+<details class="src"><summary>DatabaseSeeder.php (~30 lines)</summary><pre><code>// categories: Web Technology, Patisserie and Confectionery,
+//   Graphic Design, IT Network Administration (insertOrIgnore)
+// $web/$pat ids looked up; users insertOrIgnore:
+// 1 Admin role 1 category null / 2 Alice role 0 web / 3 Bob role 0 pat
+// all password Hash::make('password')
+// php artisan db:seed</code></pre></details>
+<p>Models: Category <span class="mono">fillable=[category_name]</span>; User <span class="mono">fillable=[username,password,role,category_id], hidden=[password]</span>; Report <span class="mono">fillable=[user_id,category_id,title,description,date,status], user() belongsTo, photos() hasMany</span>; Photo <span class="mono">fillable=[report_id,path]</span>.</p>
+</section>
+<section id="s5"><h2>5. System design (C1, C3&ndash;C9)</h2>
+<h3>5.1 Layout contract</h3>
+<p>One <span class="mono">layout.blade.php</span> extended by all views; plain <span class="mono">&lt;style&gt;</span> only (no Vite/Tailwind); mandatory <span class="mono">&lt;meta name="csrf-token"&gt;</span> for AJAX; thumbs <span class="mono">object-fit:cover</span>; middle image keeps original ratio.</p>
+<h3>5.2 Auth (C3)</h3>
+<p>Login validates required; <span class="mono">Hash::check</span>; mismatch returns <i>Username and password not matched.</i> Register validates <span class="mono">username required|unique</span>, <span class="mono">confirm required|same:password</span> (<i>Password and confirm password must matched.</i>), <span class="mono">category_id required|exists</span>; duplicate returns <i>Username already exists.</i> Success &rarr; <span class="mono">/</span> with <i>Registered. Please login.</i></p>
+<details class="src"><summary>AuthController.php (~45 lines)</summary><pre><code>// loginForm -&gt; view login
+// login: validate username+password required; find by username;
+//   !user || !Hash::check -&gt; back with 'Username and password not matched.'
+//   session user_id/username/role; role 1 -&gt; /users else /reports
+// logout: session flush -&gt; /
+// registerForm: Category::all -&gt; view register
+// register: validate + unique/same/exists with custom messages;
+//   User::create username, Hash::make password, role 0, category_id -&gt; / with ok</code></pre></details>
+<h3>5.3 One Page (C4) and Slide (C5)</h3>
+<p>Index: <span class="mono">where status 0 + photos count &gt; 0</span>; thumb = first photo; title + owner + 100-char desc; click &rarr; <span class="mono">/reports/{id}</span>. Slide top: Title/Name/Category (owner's)/Date/Description; middle: first photo default; bottom: thumbs + Prev/Next + <i>Photo X of N</i> + highlight; thumbnail/Prev/Next update via JS array + index, no reload.</p>
+<h3>5.4 My Reports (C6)</h3>
+<p><span class="mono">where user_id = session</span>; empty = 150px grey <span class="mono">#aaa</span> box; X form <span class="mono">POST /my-reports/{id}/delete</span> unlinks files then deletes; + opens modal (Title/Description/Date required, Status 0/1, kategori display-only from profile); Add creates &rarr; <span class="mono">/manage/{newId}</span>; Cancel resets + closes.</p>
+<h3>5.5 Manage (C7 top, C8 bottom)</h3>
+<p>Top: load title/description/kategori(text)/date/status; validate required + <span class="mono">in:0,1</span>; Update &rarr; <span class="mono">/my-reports</span>; Reset restores originals. Bottom: thumbs square; click &rarr; fullscreen overlay; X &rarr; <span class="mono">DELETE /photos/{id}</span>; + &rarr; multi file picker auto-upload; drag-drop auto-upload with blue-dash + <span class="mono">#e0e7ff</span> highlight; new thumbs appended without reload.</p>
+<details class="src"><summary>PhotoController.php + GD resize (~70 lines)</summary><pre><code>// upload($id): owner check; validate photos.* image max 5120;
+//   mkdir public/uploads; per file: name uploads/time_uniqid.ext;
+//   resize(src, dst, 600, 600); Photo::create; return json [{id,path}]
+// del($pid): owner check via report; unlink file; delete; {ok:1}
+// resize: getimagesize; ratio = min(600/w, 600/h, 1) [never upscale];
+//   createfrom jpeg/png/gif/webp; truecolor canvas + alpha for png/webp;
+//   copyresampled; save q85; destroy</code></pre></details>
+<h3>5.6 Users (C9, admin only)</h3>
+<p>Guard <span class="mono">session role != 1 &rarr; /</span>; list <span class="mono">role 0</span> only; kategori via category_id; <span class="mono">rcount = COUNT reports by user</span>; <span class="mono">pcount = COUNT photos via report ids</span>; Delete unlinks files then deletes user (cascade clears rows).</p>
+</section>
+<hr class="sec">
 <!-- TASK4: sections s6+s7+appendix+references+script -->
 </div>
 </body>
