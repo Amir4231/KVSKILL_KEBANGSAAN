@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KV Skills 2026 — Module C | One Page Report — Military Precision Study Guide</title>
+<style>
+:root{--navy:#0f2167;--blue:#1e40af;--bright:#3b82f6;--violet:#4f46e5;--bg:#0b1020;--panel:#111936;--card:#ffffff;--mut:#64748b;--line:#e2e8f0;--ok:#16a34a;--warn:#d97706;--red:#dc2626;--lime:#84cc16}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Inter,Arial,sans-serif;background:#f1f5f9;color:#0f172a;line-height:1.6}
+.top-progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--bright),var(--lime));width:0%;z-index:9999}
+.hero{background:radial-gradient(1000px 400px at 20% -10%,#3b82f6 0%,transparent 60%),radial-gradient(800px 400px at 90% 0%,#84cc16 0%,transparent 50%),linear-gradient(180deg,#0f2167 0%,#1e40af 100%);color:#fff;padding:48px 24px 28px;text-align:center}
+.hero .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:999px;font-size:12px;letter-spacing:1.5px;font-weight:700}
+.hero h1{font-size:clamp(28px,4.5vw,52px);margin:14px 0 6px;letter-spacing:-.5px}
+.hero h1 span{color:#fde047}
+.hero p.sub{max-width:900px;margin:0 auto;opacity:.9;font-size:15px}
+.hero-stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.stat{background:#fff;color:#0f172a;border-radius:12px;padding:10px 18px;min-width:130px;text-align:center}
+.stat b{font-size:22px;display:block}
+.stat small{color:var(--mut);font-weight:700;letter-spacing:.5px}
+.sticky{position:sticky;top:0;z-index:50;background:#0b1020;color:#fff;border-bottom:1px solid #1e293b;display:flex;overflow-x:auto;gap:4px;padding:8px 12px}
+.sticky a{color:#cbd5e1;text-decoration:none;font-size:12px;font-weight:700;white-space:nowrap;padding:8px 12px;border-radius:8px}
+.sticky a:hover,.sticky a.active{background:var(--bright);color:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 18px 60px}
+.grid2{display:grid;grid-template-columns:1fr 340px;gap:20px}
+@media(max-width:950px){.grid2{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 6px 20px rgba(15,33,103,.06)}
+.card h2{font-size:20px;color:var(--blue);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.8px;background:var(--blue);color:#fff;padding:3px 9px;border-radius:999px}
+.tag.gold{background:#ca8a04}.tag.green{background:var(--ok)}.tag.red{background:var(--red)}.tag.dark{background:#0f172a}
+.kv-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+.kv-table th{background:var(--navy);color:#fff;padding:10px;text-align:left}
+.kv-table td{border:1px solid var(--line);padding:9px 10px;vertical-align:top}
+.kv-table tr:nth-child(even) td{background:#f8fafc}
+.bar{height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--bright),var(--violet))}
+code,pre{font-family:Consolas,Menlo,monospace}
+pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:10px;overflow:auto;font-size:12.5px;line-height:1.55;margin:10px 0;position:relative}
+.codehead{display:flex;justify-content:space-between;align-items:center;background:#1e293b;color:#fff;font-size:12px;padding:6px 12px;border-radius:10px 10px 0 0;margin-bottom:-10px;font-weight:700}
+.copybtn{background:var(--bright);border:0;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700}
+.copybtn:hover{background:#2563eb}
+ul.chk{list-style:none}
+ul.chk li{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:7px 0;font-size:13.5px;display:flex;gap:10px;align-items:flex-start}
+ul.chk li.done{opacity:.6;text-decoration:line-through}
+ul.chk input{margin-top:4px;transform:scale(1.2)}
+.req{border-left:4px solid var(--bright);background:#eff6ff;padding:10px 12px;border-radius:0 10px 10px 0;margin:8px 0;font-size:13.5px}
+.warn{border-left:4px solid var(--warn);background:#fffbeb;padding:10px 12px;border-radius:0 10px 10px 0;margin:8px 0;font-size:13.5px}
+.crit{border-left:4px solid var(--red);background:#fef2f2;padding:10px 12px;border-radius:0 10px 10px 0;margin:8px 0;font-size:13.5px}
+.okbox{border-left:4px solid var(--ok);background:#f0fdf4;padding:10px 12px;border-radius:0 10px 10px 0;margin:8px 0;font-size:13.5px}
+.side{position:sticky;top:60px;align-self:start}
+.timeline{border-left:3px solid var(--blue);margin-left:8px;padding-left:18px}
+.timeline div{position:relative;margin-bottom:14px;background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-size:13px}
+.timeline div::before{content:'';position:absolute;left:-26px;top:12px;width:12px;height:12px;background:var(--blue);border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px var(--blue)}
+kbd{background:#0f172a;color:#fff;padding:2px 7px;border-radius:6px;font-size:12px}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.flow span{background:#0f172a;color:#fff;font-size:12px;padding:6px 10px;border-radius:999px;font-weight:700}
+.flow span.arrow{background:transparent;color:var(--blue);font-size:16px}
+.searchbox{display:flex;gap:8px;margin-bottom:12px}
+.searchbox input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+.btn{background:var(--blue);color:#fff;border:0;padding:10px 16px;border-radius:10px;font-weight:800;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--blue);border:1px solid var(--blue)}
+.schema{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}
+.schema .tbl{border:2px solid var(--navy);border-radius:12px;overflow:hidden}
+.schema .tbl h4{background:var(--navy);color:#fff;padding:8px 12px;font-size:13px}
+.schema .tbl ul{list-style:none;font-size:12.5px;padding:10px 12px}
+.schema .tbl li{padding:4px 0;border-bottom:1px dashed #e2e8f0}
+.schema .tbl li:last-child{border:0}
+.print-note{font-size:12px;color:var(--mut)}
+footer{text-align:center;padding:24px;color:#94a3b8;font-size:12px}
+@media print{.sticky,.side .timerbox,.searchbox,.copybtn{display:none!important}.wrap{max-width:100%}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="top-progress" id="prog"></div>
+<div class="hero">
+<div class="badge">KV SKILLS 2026 • KOLEJ VOKASIONAL KEBANGSAAN KALI KE-10 • MODUL C • 6 JAM</div>
+<h1>KvSkills <span>One Page Report</span> — Military Precision Study Guide</h1>
+<p class="sub">Laravel 12 • PHP 8 • MySQL on XAMPP • jQuery optional • Server-side backend • 12-page PDF + Complete Guide distilled to one tactical webpage. Follow top-to-bottom. No guessing.</p>
+<div class="hero-stats">
+<div class="stat"><b>50.00</b><small>TOTAL MARKS</small></div>
+<div class="stat"><b>10</b><small>SECTIONS C1–C10</small></div>
+<div class="stat"><b>8</b><small>PAGES / SCREENS</small></div>
+<div class="stat"><b>4</b><small>DB TABLES</small></div>
+<div class="stat"><b>360</b><small>MINUTES</small></div>
+<div class="stat"><b>Laravel 12</b><small>PHP 8.2+ • XAMPP</small></div>
+</div>
+</div>
+<nav class="sticky" id="nav">
+<a href="#mission">Mission</a><a href="#marks">Marks C1-C10</a><a href="#setup">Setup 10-Min</a><a href="#db">Database C2</a><a href="#layout">Layout C1/C10</a><a href="#auth">Auth C3</a><a href="#gallery">OnePage C4 + Slide C5</a><a href="#my">MyReports C6</a><a href="#manage">Manage C7+C8</a><a href="#users">Users C9</a><a href="#routes">Routes</a><a href="#battle">Battle Plan</a><a href="#judge">Judge Test</a><a href="#pitfalls">Pitfalls</a>
+</nav>
+<div class="wrap">
+<div class="searchbox"><input id="q" placeholder="Search this guide — e.g. status, 600x600, cascade, Admin, AJAX..."><button class="btn" onclick="doPrint()">Print / PDF</button></div>
+<div class="grid2">
+<div id="maincol">
+
+<div class="card" id="mission">
+<h2><span class="tag">S0</span> Mission Brief — What You Build</h2>
+<p><b>Project:</b> <kbd>CompetitorID_Module_C</kbd> — server-side app named <b>KvSkills One Page Report</b>. Registered users create one-page event reports, upload photos, share for others to view. Plain style allowed — backend marks matter, design only 3 marks (C10).</p>
+<div class="flow"><span>Index | Login /</span><span class="arrow">→</span><span>Register</span><span class="arrow">→</span><span>One Page Report /reports</span><span class="arrow">→</span><span>Report /reports/{id}</span><span class="arrow">→</span><span>My Reports</span><span class="arrow">→</span><span>Manage /manage/{id}</span><span class="arrow">→</span><span>Users (admin)</span><span class="arrow">→</span><span>Logout</span></div>
+<table class="kv-table"><tr><th>#</th><th>Screen</th><th>Route</th><th>Access</th><th>Core Rule</th></tr>
+<tr><td>1</td><td>Index | Login</td><td><kbd>/</kbd> + POST <kbd>/login</kbd></td><td>Guest</td><td>role 0→/reports, role 1→/users. Error if mismatch.</td></tr>
+<tr><td>2</td><td>Register</td><td><kbd>/register</kbd></td><td>Guest</td><td>All required. password==confirm. username unique. category from DB.</td></tr>
+<tr><td>3</td><td>One Page Report</td><td><kbd>/reports</kbd></td><td>User</td><td>Only <b>public (status=0) + non-empty</b>. Thumb = first photo square-cropped. Show title + owner.</td></tr>
+<tr><td>4</td><td>Report / Slide</td><td><kbd>/reports/{id}</kbd></td><td>User</td><td>Top meta, middle big photo, bottom thumbs + Prev/Next + count. <b>JS, no reload.</b></td></tr>
+<tr><td>5</td><td>My Reports</td><td><kbd>/my-reports</kbd></td><td>Owner</td><td>All mine. Empty=grey box. X=delete cascade. +=modal → redirect to /manage/{newId}.</td></tr>
+<tr><td>6</td><td>Manage Report</td><td><kbd>/manage/{id}</kbd></td><td>Owner</td><td>Top: edit title/desc/date/status, category text-only. Bottom: AJAX upload + drag-drop + 600×600 resize + fullscreen + delete.</td></tr>
+<tr><td>7</td><td>Users</td><td><kbd>/users</kbd></td><td>Admin only</td><td>Table username|kategori|reports count|photos count|Delete cascade.</td></tr>
+<tr><td>8</td><td>Logout</td><td><kbd>/logout</kbd></td><td>Auth</td><td>No UI. flush session → <kbd>/</kbd>.</td></tr>
+</table>
+<div class="req"><b>Layout law (every page):</b> distinct <b>Header + Nav + Main + Footer</b>. Nav states — Before login: Index | Register. User: One Page Report | My Reports | Logout + username right (e.g. Alice/Bob). Admin: User | Logout + Admin right.</div>
+</div>
+
+<div class="card" id="marks">
+<h2><span class="tag gold">MARKS</span> Marking Scheme C1–C10 = 50.00 — Attack Order</h2>
+<p>Highest weight first. If time short, secure C8 → C3 → C6 → C5 in that order.</p>
+<table class="kv-table"><tr><th>Sec</th><th>Criterion</th><th>Max</th><th>%</th><th>Priority</th></tr>
+<tr><td>C8</td><td>Report Photos (Bottom) — AJAX upload, drag-drop, highlight, 600×600, reload list, fullscreen, delete</td><td>8.50</td><td>17%</td><td>P1 <div class="bar"><i style="width:100%"></i></div></td></tr>
+<tr><td>C3</td><td>Authentication — login/logout/register, validation, hashing, redirects, nav</td><td>7.50</td><td>15%</td><td>P1 <div class="bar"><i style="width:88%"></i></div></td></tr>
+<tr><td>C6</td><td>MyReport Page — list mine, grey empty, X delete, + modal, validation</td><td>7.25</td><td>14.5%</td><td>P1 <div class="bar"><i style="width:85%"></i></div></td></tr>
+<tr><td>C5</td><td>Slide Page — meta top, big middle, thumbs bottom, Prev/Next, highlight, count, JS no-reload</td><td>6.50</td><td>13%</td><td>P2 <div class="bar"><i style="width:76%"></i></div></td></tr>
+<tr><td>C2</td><td>Database — 4 tables, keys, seed Admin/Alice/Bob + categories</td><td>5.25</td><td>10.5%</td><td>P1 (do first) <div class="bar"><i style="width:62%"></i></div></td></tr>
+<tr><td>C4</td><td>One Page Report Page — public + non-empty only, first-photo thumb, title+owner, click→slide</td><td>3.50</td><td>7%</td><td>P2 <div class="bar"><i style="width:41%"></i></div></td></tr>
+<tr><td>C7</td><td>Report Information (Top) — load, validate, category text, Update→my-reports, Reset</td><td>3.50</td><td>7%</td><td>P2 <div class="bar"><i style="width:41%"></i></div></td></tr>
+<tr><td>C9</td><td>Users page — aggregate reports/photos counts, delete cascade</td><td>3.00</td><td>6%</td><td>P3 <div class="bar"><i style="width:35%"></i></div></td></tr>
+<tr><td>C10</td><td>Design and layout — clean, header/nav/main/footer, UX smooth</td><td>3.00</td><td>6%</td><td>Free via layout <div class="bar"><i style="width:35%"></i></div></td></tr>
+<tr><td>C1</td><td>Structure — CompetitorID_Module_C folder, Laravel 12 structure</td><td>2.00</td><td>4%</td><td>Free <div class="bar"><i style="width:23%"></i></div></td></tr>
+</table>
+<div class="okbox"><b>Materials provided:</b> Pre-downloaded Laravel 12 (no composer, no internet), <kbd>Module_C_Media_Files.zip</kbd> (image/ + description + categoris.csv), Laravel docs 12.x link. Save to <kbd>C:\xampp\htdocs\YOUR_IC_Module_C</kbd>.</div>
+</div>
+
+<div class="card" id="setup">
+<h2><span class="tag">S1</span> Competition Hall Setup — First 10 Minutes (C1)</h2>
+<ul class="chk">
+<li><input type="checkbox"> Start XAMPP → Apache + MySQL green → MySQL Admin → phpMyAdmin</li>
+<li><input type="checkbox"> Create DB <kbd>kvskill</kbd> collation <kbd>utf8mb4_unicode_ci</kbd>, user root / blank password</li>
+<li><input type="checkbox"> Unzip <kbd>Module_C_Media_Files.zip</kbd> to Desktop for upload testing</li>
+<li><input type="checkbox"> Open Laravel folder in VS Code, verify <kbd>php --version</kbd> (8.2+) and <kbd>php artisan --version</kbd> (12.x). Do NOT run composer create-project.</li>
+<li><input type="checkbox"> Fix <kbd>.env</kbd> 6 lines + SESSION_DRIVER=file + key:generate</li>
+<li><input type="checkbox"> Create <kbd>public/uploads</kbd> folder</li>
+</ul>
+<div class="codehead">.env — exact 7 lines <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kvskill
+DB_USERNAME=root
+DB_PASSWORD=
+SESSION_DRIVER=file</pre>
+<div class="codehead">Terminal <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php --version
+php artisan --version
+php artisan key:generate
+New-Item -ItemType Directory -Path "public\uploads" -Force
+php artisan serve
+# open http://127.0.0.1:8000</pre>
+</div>
+
+<div class="card" id="db">
+<h2><span class="tag">C2 5.25</span> Database — 4 Tables + Secret Status Field</h2>
+<div class="crit"><b>MILITARY SECRET:</b> PDF table for Reports omits <kbd>status</kbd> but C6/C7 require it. You MUST add <kbd>status tinyint default 0</kbd> (0=public, 1=private). Without it you lose ~10 marks. Also Reports.Category_id + Users.Category_id are nullable FK → categories.</div>
+<div class="schema">
+<div class="tbl"><h4>categories — id | category_name</h4><ul><li><b>id</b> PK bigint</li><li><b>category_name</b> varchar(255)</li><li>Seed: Web Technology, Patisserie and Confectionery, … + categoris.csv</li></ul></div>
+<div class="tbl"><h4>users — id | username UQ | password hash | role | category_id FK nullable</h4><ul><li><b>id</b> PK</li><li><b>username</b> unique, login</li><li><b>password</b> hashed (Hash::make)</li><li><b>role</b> 0=user 1=admin</li><li><b>category_id</b> → categories, nullOnDelete</li><li>Pre-insert: 1 Admin/1, 2 Alice/0, 3 Bob/0, password=password</li></ul></div>
+<div class="tbl"><h4>reports — id | user_id cascade | category_id | title | description | date | status</h4><ul><li><b>user_id</b> → users cascade</li><li><b>category_id</b> nullable → categories</li><li><b>title</b> varchar 255 required</li><li><b>description</b> varchar 255 required</li><li><b>date</b> date required</li><li><b>status</b> 0 public 1 private — REQUIRED</li></ul></div>
+<div class="tbl"><h4>photos — id | report_id cascade | path</h4><ul><li><b>report_id</b> → reports cascade</li><li><b>path</b> varchar 255 e.g. uploads/xxx.jpg</li><li>Cascade = delete user/report auto-deletes children — saves 30 min</li></ul></div>
+</div>
+<div class="codehead">Migrations — artisan + up() replace <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php artisan make:migration create_categories_table
+php artisan make:migration create_users_table
+php artisan make:migration create_reports_table
+php artisan make:migration create_photos_table
+
+// categories up():
+Schema::create('categories', fn($t)=>[$t-&gt;id(), $t-&gt;string('category_name',255), $t-&gt;timestamps()]);
+// users up():
+Schema::create('users', function($t){
+ $t-&gt;id(); $t-&gt;string('username',255)-&gt;unique(); $t-&gt;string('password',255);
+ $t-&gt;tinyInteger('role')-&gt;default(0);
+ $t-&gt;foreignId('category_id')-&gt;nullable()-&gt;constrained('categories')-&gt;nullOnDelete();
+ $t-&gt;timestamps(); });
+// reports up():
+Schema::create('reports', function($t){
+ $t-&gt;id(); $t-&gt;foreignId('user_id')-&gt;constrained('users')-&gt;onDelete('cascade');
+ $t-&gt;foreignId('category_id')-&gt;nullable()-&gt;constrained('categories')-&gt;nullOnDelete();
+ $t-&gt;string('title',255); $t-&gt;string('description',255); $t-&gt;date('date');
+ $t-&gt;tinyInteger('status')-&gt;default(0); $t-&gt;timestamps(); });
+// photos up():
+Schema::create('photos', function($t){
+ $t-&gt;id(); $t-&gt;foreignId('report_id')-&gt;constrained('reports')-&gt;onDelete('cascade');
+ $t-&gt;string('path',255); $t-&gt;timestamps(); });
+php artisan migrate</pre>
+<div class="codehead">DatabaseSeeder.php — replace whole file <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>&lt;?php
+namespace Database\Seeders;
+use Illuminate\Database\Seeder, Illuminate\Support\Facades\DB, Illuminate\Support\Facades\Hash;
+class DatabaseSeeder extends Seeder {
+ public function run(): void {
+  foreach (['Web Technology','Patisserie and Confectionery','Graphic Design','IT Network Administration'] as $c)
+   DB::table('categories')-&gt;insertOrIgnore(['category_name'=&gt;$c,'created_at'=&gt;now(),'updated_at'=&gt;now()]);
+  $web = DB::table('categories')-&gt;where('category_name','Web Technology')-&gt;value('id');
+  $pat = DB::table('categories')-&gt;where('category_name','Patisserie and Confectionery')-&gt;value('id');
+  DB::table('users')-&gt;insertOrIgnore([
+   ['id'=&gt;1,'username'=&gt;'Admin','password'=&gt;Hash::make('password'),'role'=&gt;1,'category_id'=&gt;null,'created_at'=&gt;now(),'updated_at'=&gt;now()],
+   ['id'=&gt;2,'username'=&gt;'Alice','password'=&gt;Hash::make('password'),'role'=&gt;0,'category_id'=&gt;$web,'created_at'=&gt;now(),'updated_at'=&gt;now()],
+   ['id'=&gt;3,'username'=&gt;'Bob','password'=&gt;Hash::make('password'),'role'=&gt;0,'category_id'=&gt;$pat,'created_at'=&gt;now(),'updated_at'=&gt;now()],
+  ]);
+ }
+}
+// php artisan db:seed
+// Judge logins: Admin/password, Alice/password, Bob/password (capital A matters)</pre>
+<div class="codehead">Models (fillable + relations) <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php artisan make:model Category
+php artisan make:model User
+php artisan make:model Report
+php artisan make:model Photo
+// Category: fillable=['category_name']
+// User: fillable=['username','password','role','category_id'], hidden=['password']
+// Report: fillable=['user_id','category_id','title','description','date','status']
+//   user() belongsTo(User), photos() hasMany(Photo)
+// Photo: fillable=['report_id','path']</pre>
+</div>
+
+<div class="card" id="layout">
+<h2><span class="tag">C1+C10</span> One Layout For All Pages — 5 Minutes, Free Marks</h2>
+<div class="req">Do NOT use Vite/Tailwind. Plain &lt;style&gt; only. Must contain <b>header + nav + main + footer</b>. Include <kbd>&lt;meta name="csrf-token"&gt;</kbd> for AJAX. Thumbs use <kbd>object-fit:cover</kbd> for square crop. Store file <kbd>resources/views/layout.blade.php</kbd>, all pages <kbd>@extends('layout')</kbd>.</div>
+<div class="codehead">layout.blade.php <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;meta name="csrf-token" content="{{ csrf_token() }}"&gt;
+&lt;title&gt;KvSkills One Page Report&lt;/title&gt;
+&lt;style&gt; *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+header{background:#1e40af;color:#fff;text-align:center;padding:18px;font-size:22px;font-weight:bold}
+nav{background:#4f46e5;color:#fff;display:flex;gap:20px;padding:10px 40px;align-items:center}
+nav a{color:#fff;text-decoration:none;font-size:14px} nav .spacer{flex:1}
+main{background:#f1f1f1;min-height:70vh;padding:25px 60px}
+footer{background:#1e40af;color:#fff;text-align:center;padding:15px;font-size:13px}
+.card{background:#fff;border:1px solid #ddd;border-radius:6px;overflow:hidden;width:250px}
+.thumb{width:100%;height:200px;object-fit:cover} .sq{width:150px;height:150px;object-fit:cover}
+.plus{width:150px;height:190px;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer}
+.xbtn{position:absolute;top:5px;right:5px;background:red;color:#fff;border:0;width:22px;height:22px;border-radius:3px;cursor:pointer}
+.wrap{position:relative;width:150px} .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center}
+.modal.open{display:flex} .modal .inner{background:#fff;padding:20px;width:400px;border-radius:6px}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;header&gt;KvSKILLs One Page Report&lt;/header&gt;&lt;nav&gt;
+@if(!session('user_id')) &lt;a href="/"&gt;Index&lt;/a&gt;&lt;a href="/register"&gt;Register&lt;/a&gt;
+@elseif(session('role')==1) &lt;a href="/users"&gt;User&lt;/a&gt;&lt;a href="/logout"&gt;Logout&lt;/a&gt;
+&lt;div class="spacer"&gt;&lt;/div&gt;&lt;span&gt;{{ session('username') }}&lt;/span&gt;
+@else &lt;a href="/reports"&gt;One Page Report&lt;/a&gt;&lt;a href="/my-reports"&gt;My Reports&lt;/a&gt;&lt;a href="/logout"&gt;Logout&lt;/a&gt;
+&lt;div class="spacer"&gt;&lt;/div&gt;&lt;span&gt;{{ session('username') }}&lt;/span&gt; @endif
+&lt;/nav&gt;&lt;main&gt;@yield('content')&lt;/main&gt;
+&lt;footer&gt;KvSKILLs One Page Report © 2026&lt;/footer&gt;@yield('js')&lt;/body&gt;&lt;/html&gt;</pre>
+</div>
+
+<div class="card" id="auth">
+<h2><span class="tag">C3 7.50</span> Authentication — Login / Logout / Register</h2>
+<div class="req"><b>Login Fig C2:</b> All required. Login→check Hash. role 0→<kbd>/reports</kbd>, role 1→<kbd>/users</kbd>. Reset resets. Error: <i>"Username and password not matched."</i><br><b>Register Fig C6:</b> All required. password==confirm else <i>"Password and confirm password must matched."</i> Category dropdown from categories. Duplicate → <i>"Username already exists."</i> Success→<kbd>/</kbd> with "Registered. Please login."</div>
+<div class="codehead">AuthController.php — replace whole file <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php artisan make:controller AuthController
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request, App\Models\User, App\Models\Category, Illuminate\Support\Facades\Hash;
+class AuthController extends Controller {
+ public function loginForm(){ return view('login'); }
+ public function login(Request $r){
+  $r-&gt;validate(['username'=&gt;'required','password'=&gt;'required']);
+  $u = User::where('username',$r-&gt;username)-&gt;first();
+  if(!$u || !Hash::check($r-&gt;password,$u-&gt;password))
+   return back()-&gt;with('error','Username and password not matched.');
+  session(['user_id'=&gt;$u-&gt;id,'username'=&gt;$u-&gt;username,'role'=&gt;$u-&gt;role]);
+  return $u-&gt;role==1 ? redirect('/users') : redirect('/reports');
+ }
+ public function logout(){ session()-&gt;flush(); return redirect('/'); }
+ public function registerForm(){ return view('register',['cats'=&gt;Category::all()]); }
+ public function register(Request $r){
+  $r-&gt;validate([
+   'username'=&gt;'required|unique:users,username',
+   'password'=&gt;'required','confirm'=&gt;'required|same:password',
+   'category_id'=&gt;'required|exists:categories,id'],
+   ['username.unique'=&gt;'Username already exists.',
+    'confirm.same'=&gt;'Password and confirm password must matched.']);
+  User::create(['username'=&gt;$r-&gt;username,'password'=&gt;Hash::make($r-&gt;password),
+   'role'=&gt;0,'category_id'=&gt;$r-&gt;category_id]);
+  return redirect('/')-&gt;with('ok','Registered. Please login.');
+ }
+}</pre>
+<table class="kv-table"><tr><th>View</th><th>File</th><th>Must Have</th></tr>
+<tr><td>Login</td><td><kbd>login.blade.php</kbd></td><td>@extends layout, .box, @csrf, username+password required, Login (flex:1) + Reset buttons, session error/ok display</td></tr>
+<tr><td>Register</td><td><kbd>register.blade.php</kbd></td><td>username, password, confirm, kategori select -- Pilih Kategori -- loop $cats, Register + Reset, $errors-&gt;first()</td></tr></table>
+</div>
+
+<div class="card" id="gallery">
+<h2><span class="tag">C4 3.50 + C5 6.50</span> One Page Report + Slide (Report) Page</h2>
+<div class="req"><b>C4 Fig C7:</b> List <b>all public (status=0) + non-empty</b> of all users. First photo = thumb square. Show title + owner username (+ desc snippet). Click thumb → <kbd>/reports/{id}</kbd>.<br><b>C5 Fig C8 Slide:</b> Top: Title, Name(owner), Category (owner's category), Date, Description. Middle: selected photo original ratio (default first). Bottom: all thumbs square + click select + Prev/Next + <i>Photo X of N</i> + highlight + <b>JS/AJAX no reload</b>.</div>
+<div class="codehead">ReportController.php (part 1) <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php artisan make:controller ReportController
+&lt;?php
+namespace App\Http\Controllers;
+use App\Models\Report;
+class ReportController extends Controller {
+ public function index(){
+  if(!session('user_id')) return redirect('/');
+  $reports = Report::where('status',0)-&gt;with(['user','photos'])-&gt;get()
+    -&gt;filter(fn($r)=&gt;$r-&gt;photos-&gt;count()&gt;0);
+  return view('onepage',compact('reports'));
+ }
+ public function show($id){
+  if(!session('user_id')) return redirect('/');
+  $rep = Report::with(['user','photos'])-&gt;findOrFail($id);
+  $catName = $rep-&gt;user-&gt;category_id
+   ? \App\Models\Category::find($rep-&gt;user-&gt;category_id)-&gt;category_name ?? '-' : '-';
+  return view('slide',compact('rep','catName'));
+ }
+}</pre>
+<div class="codehead">onepage.blade.php + slide.blade.php JS logic <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>// onepage: @foreach($reports as $r) card: a[href=/reports/{{$r-&gt;id}}] img.thumb[src=/{{$r-&gt;photos-&gt;first()-&gt;path}}] + b{{$r-&gt;title}} + small{{$r-&gt;user-&gt;username}} + Str::limit(desc,100)
+// slide top: Title/Name/Category/Date/Description. middle: img#big[src first] + div#count. bottom: button Prev + @foreach photos img.thumbBtn[data-i] + button Next
+&lt;script&gt;
+let photos = [@foreach($rep-&gt;photos as $p)"/{{ $p-&gt;path }}",@endforeach];
+let idx=0;
+function show(i){ idx=(i+photos.length)%photos.length;
+ document.getElementById('big').src=photos[idx];
+ document.getElementById('count').innerText=`Photo ${idx+1} of ${photos.length}`;
+ document.querySelectorAll('.thumbBtn').forEach((el,k)=&gt;el.style.border=k===idx?'2px solid blue':'2px solid transparent'); }
+document.querySelectorAll('.thumbBtn').forEach(el=&gt;el.onclick=()=&gt;show(parseInt(el.dataset.i)));
+function move(d){ show(idx+d); }
+&lt;/script&gt;</pre>
+<div class="warn"><b>Precision check:</b> Private (1) never appears in One Page. Empty (0 photos) never appears. Filter in controller, not just view. Keep aspect in middle (max-width/ max-height), square only for thumbs.</div>
+</div>
+
+<div class="card" id="my">
+<h2><span class="tag">C6 7.25</span> My Reports + Add Modal (Fig C10 + C11)</h2>
+<div class="req"><b>List:</b> only <kbd>where user_id = session</kbd>. First photo thumb else <b>grey solid box 150×150 #aaa</b>. Show title. X (cross) top-right deletes report+photos files. Click thumb → <kbd>/manage/{id}</kbd>. <b>+ (plus dashed box)</b> opens modal Fig C11: Title req, Description req, Date req, Status Public 0 / Private 1, Kategori display-only (saved from profile Category_Id). Add → create → redirect <kbd>/manage/{newId}</kbd>. Cancel → reset + close.</div>
+<div class="codehead">ReportController — my/store/destroy <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>public function my(){
+ if(!session('user_id')) return redirect('/');
+ return view('myreports',['reports'=&gt;Report::where('user_id',session('user_id'))-&gt;with('photos')-&gt;get(),
+  'cats'=&gt;\App\Models\Category::all()]);
+}
+public function store(Request $r){
+ $r-&gt;validate(['title'=&gt;'required','description'=&gt;'required','date'=&gt;'required','status'=&gt;'required|in:0,1']);
+ $u=\App\Models\User::find(session('user_id'));
+ $rep=Report::create(['user_id'=&gt;$u-&gt;id,'category_id'=&gt;$u-&gt;category_id,
+  'title'=&gt;$r-&gt;title,'description'=&gt;$r-&gt;description,'date'=&gt;$r-&gt;date,'status'=&gt;$r-&gt;status]);
+ return redirect('/manage/'.$rep-&gt;id);
+}
+public function destroy($id){
+ $rep=Report::where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+ foreach($rep-&gt;photos as $p){ if(file_exists(public_path($p-&gt;path))) unlink(public_path($p-&gt;path)); }
+ $rep-&gt;delete(); return redirect('/my-reports');
+}
+// routes: GET /my-reports→my, POST /my-reports→store, POST /my-reports/{id}/delete→destroy</pre>
+<div class="okbox">Modal skeleton: <kbd>div.modal#m &gt; div.inner</kbd> with form POST /my-reports @csrf, inputs title/description/date 2026-03-31/status select, kategori select display-only loop $cats, Add + Cancel (reset + remove .open). Plus box: <kbd>onclick="getElementById('m').classList.add('open')"</kbd>.</div>
+</div>
+
+<div class="card" id="manage">
+<h2><span class="tag red">C7 3.50 + C8 8.50</span> Manage Report — Top Form + Bottom AJAX 600×600 (Fig C12)</h2>
+<div class="req"><b>C7 Top:</b> Load title/description/category/date/status. Validate title/desc/date req, status in 0,1. Category = text only (from report/user Category_Id). Update → save → redirect <kbd>/my-reports</kbd> (spec says Albums page = my-reports). Reset → original values.<br><b>C8 Bottom (heaviest):</b> Thumbs square. Click → fullscreen overlay. X → DELETE AJAX. + → file picker multi + auto-upload. Drag-drop multi + auto-upload + <b>highlight drop region</b> (outline blue + #e0e7ff). <b>Physically resize to fit 600×600, keep ratio, don't upscale small.</b> Append new thumbs without reload. All via AJAX + fetch + CSRF.</div>
+<div class="codehead">ReportController manage/update + PhotoController GD resize <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php artisan make:controller PhotoController
+public function manage($id){
+ $rep=Report::with('photos')-&gt;where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+ $catName=$rep-&gt;category_id ? \App\Models\Category::find($rep-&gt;category_id)-&gt;category_name ?? '-' : '-';
+ return view('manage',compact('rep','catName'));
+}
+public function update(Request $r,$id){
+ $r-&gt;validate(['title'=&gt;'required','description'=&gt;'required','date'=&gt;'required','status'=&gt;'required|in:0,1']);
+ Report::where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail()-&gt;update($r-&gt;only(['title','description','date','status']));
+ return redirect('/my-reports');
+}
+// PhotoController:
+public function upload(Request $r,$id){
+ $rep=Report::where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+ $r-&gt;validate(['photos.*'=&gt;'required|image|max:5120']);
+ if(!is_dir(public_path('uploads'))) mkdir(public_path('uploads'),0777,true);
+ $out=[];
+ foreach($r-&gt;file('photos') as $f){
+  $name='uploads/'.time().'_'.uniqid().'.'.$f-&gt;getClientOriginalExtension();
+  $this-&gt;resize($f-&gt;getPathname(),public_path($name),600,600);
+  $ph=Photo::create(['report_id'=&gt;$rep-&gt;id,'path'=&gt;$name]);
+  $out[]=['id'=&gt;$ph-&gt;id,'path'=&gt;$name];
+ }
+ return response()-&gt;json($out);
+}
+public function del($pid){
+ $ph=Photo::findOrFail($pid);
+ Report::where('id',$ph-&gt;report_id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+ if(file_exists(public_path($ph-&gt;path))) unlink(public_path($ph-&gt;path));
+ $ph-&gt;delete(); return response()-&gt;json(['ok'=&gt;1]);
+}
+private function resize($src,$dst,$maxW,$maxH){
+ [$w,$h,$type]=getimagesize($src); $ratio=min($maxW/$w,$maxH/$h,1);
+ $nw=(int)($w*$ratio); $nh=(int)($h*$ratio);
+ switch($type){case IMAGETYPE_JPEG:$s=imagecreatefromjpeg($src);break;
+  case IMAGETYPE_PNG:$s=imagecreatefrompng($src);break;
+  case IMAGETYPE_GIF:$s=imagecreatefromgif($src);break;
+  case IMAGETYPE_WEBP:$s=imagecreatefromwebp($src);break;
+  default:copy($src,$dst);return;}
+ $d=imagecreatetruecolor($nw,$nh);
+ if($type==IMAGETYPE_PNG||$type==IMAGETYPE_WEBP){imagealphablending($d,false);imagesavealpha($d,true);}
+ imagecopyresampled($d,$s,0,0,0,0,$nw,$nh,$w,$h);
+ switch($type){case IMAGETYPE_JPEG:imagejpeg($d,$dst,85);break;
+  case IMAGETYPE_PNG:imagepng($d,$dst);break;
+  case IMAGETYPE_GIF:imagegif($d,$dst);break;
+  case IMAGETYPE_WEBP:imagewebp($d,$dst,85);break;}
+ imagedestroy($s);imagedestroy($d);
+}</pre>
+<div class="codehead">manage.blade.php JS — fetch + drag-drop + fullscreen <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>const repId={{ $rep-&gt;id }}, token=document.querySelector('meta[name=csrf-token]').content;
+const plist=file_plus_elements; plus.onclick=()=&gt;file.click(); file.onchange=()=&gt;upload(file.files);
+['dragover','dragenter']→preventDefault + outline blue + bg #e0e7ff
+['dragleave','drop']→clear style; drop→upload(e.dataTransfer.files)
+function upload(files){ fd=new FormData(); for(f of files) fd.append('photos[]',f);
+ fetch(`/manage/${repId}/photos`,{method:'POST',headers:{'X-CSRF-TOKEN':token},body:fd})
+ .then(r=&gt;r.json()).then(arr=&gt;{arr.forEach(addThumb); file.value='';}); }
+function addThumb(o){ div.wrap innerHTML=`&lt;img src="/${o.path}" class="sq" onclick="openFull('/${o.path}')"&gt;&lt;button class="xbtn" onclick="delPhoto(${o.id},this)"&gt;x&lt;/button&gt;`; insertBefore(plus); }
+function delPhoto(id,btn){ fetch(`/photos/${id}`,{method:'DELETE',headers:{'X-CSRF-TOKEN':token}}).then(()=&gt;btn.closest('.wrap').remove()); }
+function openFull(src){ fullimg.src=src; full.style.display='flex'; } // overlay click closes</pre>
+</div>
+
+<div class="card" id="users">
+<h2><span class="tag">C9 3.00</span> Users Page — Admin Only (Fig C13)</h2>
+<div class="req">Guard: <kbd>if(session('role')!=1) redirect /</kbd>. List <b>role=0 only</b>. Columns: Username | Kategori (via category_id) | Reports count (COUNT reports by user) | Photos count (COUNT photos via report ids) | Delete. Delete cascades user→reports→photos + unlink files.</div>
+<div class="codehead">UserController.php <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>php artisan make:controller UserController
+&lt;?php
+namespace App\Http\Controllers;
+use App\Models\User, App\Models\Report;
+class UserController extends Controller {
+ public function index(){
+  if(session('role')!=1) return redirect('/');
+  $users=User::where('role',0)-&gt;get();
+  foreach($users as $u){
+   $u-&gt;cat=$u-&gt;category_id ? \App\Models\Category::find($u-&gt;category_id)-&gt;category_name ?? '-' : '-';
+   $u-&gt;rcount=Report::where('user_id',$u-&gt;id)-&gt;count();
+   $rids=Report::where('user_id',$u-&gt;id)-&gt;pluck('id');
+   $u-&gt;pcount=\App\Models\Photo::whereIn('report_id',$rids)-&gt;count();
+  }
+  return view('users',compact('users'));
+ }
+ public function destroy($id){
+  if(session('role')!=1) return redirect('/');
+  $u=User::findOrFail($id);
+  foreach(Report::where('user_id',$u-&gt;id)-&gt;get() as $rep)
+   foreach($rep-&gt;photos as $p){ if(file_exists(public_path($p-&gt;path))) unlink(public_path($p-&gt;path)); }
+  $u-&gt;delete(); return back();
+ }
+}
+// view users.blade: table tr th Username/Kategori/Reports/Photos + form POST /users/{id}/delete @csrf button Delete</pre>
+</div>
+
+<div class="card" id="routes">
+<h2><span class="tag dark">ROUTES</span> routes/web.php — Replace Whole File</h2>
+<div class="codehead">web.php master <button class="copybtn" onclick="copy(this)">Copy</button></div>
+<pre>&lt;?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController, App\Http\Controllers\ReportController, App\Http\Controllers\PhotoController, App\Http\Controllers\UserController;
+Route::get('/',[AuthController::class,'loginForm']);
+Route::post('/login',[AuthController::class,'login']);
+Route::get('/logout',[AuthController::class,'logout']);
+Route::get('/register',[AuthController::class,'registerForm']);
+Route::post('/register',[AuthController::class,'register']);
+Route::get('/reports',[ReportController::class,'index']);
+Route::get('/reports/{id}',[ReportController::class,'show']);
+Route::get('/my-reports',[ReportController::class,'my']);
+Route::post('/my-reports',[ReportController::class,'store']);
+Route::post('/my-reports/{id}/delete',[ReportController::class,'destroy']);
+Route::get('/manage/{id}',[ReportController::class,'manage']);
+Route::post('/manage/{id}',[ReportController::class,'update']);
+Route::post('/manage/{id}/photos',[PhotoController::class,'upload']);
+Route::delete('/photos/{id}',[PhotoController::class,'del']);
+Route::get('/users',[UserController::class,'index']);
+Route::post('/users/{id}/delete',[UserController::class,'destroy']);</pre>
+<table class="kv-table"><tr><th>Test Credentials</th><th>Value</th></tr><tr><td>Admin</td><td><kbd>Admin / password</kbd> → /users</td></tr><tr><td>User</td><td><kbd>Alice / password</kbd>, <kbd>Bob / password</kbd> → /reports</td></tr><tr><td>DB</td><td><kbd>kvskill / root / (blank)</kbd> @ 127.0.0.1:3306</td></tr><tr><td>Submit folder</td><td><kbd>C:\xampp\htdocs\YOUR_IC_Module_C</kbd></td></tr></table>
+</div>
+
+<div class="card" id="battle">
+<h2><span class="tag gold">BATTLE PLAN</span> 6-Hour Execution Order (360 min)</h2>
+<div class="timeline">
+<div><b>0–30m:</b> XAMPP + DB + migrate + seed + .env + uploads. Verify phpMyAdmin shows 4 tables.</div>
+<div><b>30–90m:</b> layout.blade + AuthController + login/register views + routes auth. Test Admin→/users, Alice→/reports.</div>
+<div><b>90–150m:</b> One Page (index) + Slide (show) + JS Prev/Next/count. Test public+non-empty filter.</div>
+<div><b>150–210m:</b> My Reports + Add modal + Manage top (manage/update). Test grey empty, X delete, modal redirect.</div>
+<div><b>210–300m:</b> PhotoController GD resize 600×600 + AJAX upload/drag-drop/highlight/fullscreen/delete. Hardest — reserve 90m.</div>
+<div><b>300–330m:</b> Users page aggregate + delete cascade.</div>
+<div><b>330–360m:</b> Full judge simulation + fix + copy to submit folder + export DB.</div>
+</div>
+</div>
+
+<div class="card" id="judge">
+<h2><span class="tag green">JUDGE PROTOCOL</span> Test Like The Judge Will — Click To Check</h2>
+<ul class="chk" id="checklist">
+<li><input type="checkbox"> Duplicate register → "Username already exists."</li>
+<li><input type="checkbox"> Wrong password → "Username and password not matched."</li>
+<li><input type="checkbox"> Password/confirm mismatch → "Password and confirm password must matched."</li>
+<li><input type="checkbox"> Private report NOT in One Page; Public + ≥1 photo appears</li>
+<li><input type="checkbox"> Empty report = grey box in My Reports, absent in One Page</li>
+<li><input type="checkbox"> Slide Prev/Next + Photo X of N updates, highlight moves, no reload</li>
+<li><input type="checkbox"> Thumbnail click changes big photo, default = first photo</li>
+<li><input type="checkbox"> Manage: upload 3 photos via + click AND via drag-drop, no reload, thumbs append</li>
+<li><input type="checkbox"> Uploaded file physically ≤600×600, ratio kept, small files not upscaled</li>
+<li><input type="checkbox"> Drop region glows (dashed blue + #e0e7ff) on dragover</li>
+<li><input type="checkbox"> Click thumb → fullscreen, click overlay → close</li>
+<li><input type="checkbox"> Delete photo / report / user removes DB row + physical file</li>
+<li><input type="checkbox"> Reset resets form, Cancel resets + closes modal</li>
+<li><input type="checkbox"> Every page has header/nav/main/footer + username top-right when logged in</li>
+<li><input type="checkbox"> Logout has no UI, redirects to / ; unauthenticated /reports redirects to /</li>
+<li><input type="checkbox"> Admin sees User|Logout only; User sees One Page|My Reports|Logout</li>
+</ul>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn" onclick="resetChk()">Reset Checklist</button><button class="btn ghost" onclick="doPrint()">Print Checklist</button><span id="score" style="margin-left:auto;font-weight:800"></span></div>
+</div>
+
+<div class="card" id="pitfalls">
+<h2><span class="tag red">PITFALLS</span> Military Rules — Zero-Defect Orders</h2>
+<div class="crit"><b>1.</b> Missing <kbd>status</kbd> = fail C6/C7. Default 0. Validate <kbd>in:0,1</kbd>.<br><b>2.</b> Username <kbd>Admin</kbd> capital A. Password hashed via <kbd>Hash::make('password')</kbd>, check via <kbd>Hash::check</kbd>.<br><b>3.</b> <kbd>SESSION_DRIVER=file</kbd> — avoids missing session table error.<br><b>4.</b> Always <kbd>@csrf</kbd> in forms + <kbd>X-CSRF-TOKEN</kbd> header in fetch.<br><b>5.</b> Cascade deletes in migrations (<kbd>onDelete('cascade')</kbd>) + unlink physical files manually.<br><b>6.</b> <kbd>object-fit:cover</kbd> for thumbs (square crop visual), middle image keeps original ratio.<br><b>7.</b> PDF typos: "Gallery/Albums/Slide" = One Page/Reports; "Categoris/likes/albums" = categories/reports; Fig D10 = C10.<br><b>8.</b> Kategori in Add modal & Manage top is display-only text from Category_Id — do not make editable FK (spec: display based on Category_Id).<br><b>9.</b> Date input <kbd>type="date"</kbd> value <kbd>2026-03-31</kbd> or <kbd>11/02/2026</kbd> format accepted; store as date.<br><b>10.</b> Submit: copy folder to <kbd>C:\xampp\htdocs\YOUR_IC_Module_C</kbd> + export DB from phpMyAdmin.</div>
+<div class="okbox"><b>File map to create:</b> layout, login, register, onepage, slide, myreports, manage, users views + Auth/Report/Photo/User controllers + web.php + 4 migrations + 1 seeder + 4 models + public/uploads. Total ~17 files. Nothing else needed.</div>
+<p class="print-note">Sources: 1784452379_C1 WEB_TECHNOLOGY_FINAL_MODULE C.pdf (12 pages) + KVSkills_Module_C_Complete_Guide.md (847 lines). This page distills both with military precision — every field, route, validation message, redirect, and mark preserved.</p>
+</div>
+
+</div>
+<aside class="side">
+<div class="card timerbox"><h2>⏱ 6-Hour Timer</h2><div style="font-size:34px;font-weight:900" id="timer">06:00:00</div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn" onclick="startT()">Start</button><button class="btn ghost" onclick="stopT()">Pause</button><button class="btn ghost" onclick="resetT()">Reset</button></div><div class="bar"><i id="tbar" style="width:0%"></i></div><small>Simulate competition pressure while studying.</small></div>
+<div class="card"><h2>⚡ Quick Recall</h2><table class="kv-table"><tr><th>Key</th><th>Value</th></tr><tr><td>Status</td><td>0 Public / 1 Private</td></tr><tr><td>Role</td><td>0 User / 1 Admin</td></tr><tr><td>Resize</td><td>max 600×600, ratio, no upscale</td></tr><tr><td>Thumb</td><td>first photo, object-fit:cover</td></tr><tr><td>Empty</td><td>grey #aaa, hidden in /reports</td></tr><tr><td>Slide JS</td><td>array + idx + show(i), no reload</td></tr><tr><td>Upload</td><td>FormData photos[] + fetch POST</td></tr><tr><td>Delete photo</td><td>fetch DELETE /photos/{id}</td></tr></table></div>
+<div class="card"><h2>📊 Progress</h2><div id="ptext" style="font-weight:800">0 / 16 checks</div><div class="bar"><i id="pbar" style="width:0%"></i></div></div>
+</aside>
+</div>
+</div>
+<footer>KvSkills One Page Report © 2026 • Military Precision Study Guide • Generated from Module C PDF + Complete Guide • Laravel 12 • PHP 8 • MySQL</footer>
+<script>
+function copy(btn){const pre=btn.parentElement.nextElementSibling;const t=pre.innerText;navigator.clipboard.writeText(t).then(()=>{btn.innerText='Copied!';setTimeout(()=>btn.innerText='Copy',1200)})}
+function doPrint(){window.print()}
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;document.getElementById('prog').style.width=p+'%'});
+const boxes=[...document.querySelectorAll('#checklist input')];
+function save(){localStorage.setItem('kv-c',JSON.stringify(boxes.map(b=>b.checked)));upd()}
+function upd(){const n=boxes.filter(b=>b.checked).length;document.getElementById('pbar').style.width=(n/boxes.length*100)+'%';document.getElementById('ptext').innerText=n+' / '+boxes.length+' checks';document.getElementById('score').innerText=Math.round(n/boxes.length*50)+' / 50 readiness';boxes.forEach(b=>b.closest('li').classList.toggle('done',b.checked))}
+function resetChk(){boxes.forEach(b=>b.checked=false);save()}
+boxes.forEach(b=>b.addEventListener('change',save));
+try{const s=JSON.parse(localStorage.getItem('kv-c')||'[]');boxes.forEach((b,i)=>b.checked=!!s[i])}catch(e){}
+upd();
+let sec=6*3600,iv=null;
+function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),x=String(s%60).padStart(2,'0');return h+':'+m+':'+x}
+function tick(){if(sec>0){sec--;document.getElementById('timer').innerText=fmt(sec);document.getElementById('tbar').style.width=((6*3600-sec)/(6*3600)*100)+'%'}else stopT()}
+function startT(){if(!iv)iv=setInterval(tick,1000)}
+function stopT(){clearInterval(iv);iv=null}
+function resetT(){stopT();sec=6*3600;document.getElementById('timer').innerText=fmt(sec);document.getElementById('tbar').style.width='0%'}
+document.getElementById('q').addEventListener('input',e=>{const v=e.target.value.toLowerCase();document.querySelectorAll('#maincol .card').forEach(c=>{c.style.display=c.innerText.toLowerCase().includes(v)?'':'none'})});
+document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('#nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
+</script>
+</body>
+</html>
