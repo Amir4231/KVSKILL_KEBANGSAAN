@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KvSkills One Page Report — Module C Technical Study Guide (KV Skills 2026)</title>
+<style>
+:root{--ink:#111;--accent:#1b2a6b;--muted:#555;--max:68ch}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55;background:#fff}
+.page{max-width:var(--max);margin:0 auto;padding:24px 18px 64px}
+.cover{border-top:4px solid var(--accent);border-bottom:1px solid var(--accent);padding:20px 0 14px;margin-bottom:18px}
+.cover .prog{font-family:ui-monospace,Consolas,monospace;font-size:12px;letter-spacing:.08em;color:var(--muted)}
+h1{font-size:28px;line-height:1.2;margin:8px 0;color:var(--ink)}
+h2{font-size:20px;color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:4px;margin:28px 0 10px}
+h3{font-size:16px;margin:18px 0 6px}
+p,li{font-size:15px}
+.mono,.cap,.nomen td:last-child{font-family:ui-monospace,Consolas,monospace;font-size:13px}
+table.spec{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+table.spec th{border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left;padding:6px 8px;font-size:13px}
+table.spec td{border-bottom:1px solid #ddd;padding:6px 8px;vertical-align:top}
+table.spec td.num,table.spec th.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.scroll table{min-width:560px}
+.fig{border:1px solid #ccc;padding:10px 12px;margin:12px 0;break-inside:avoid}
+.fig .cap{font-family:Arial,Helvetica,sans-serif;font-size:12px;color:var(--muted);margin-top:6px}
+hr.sec{border:0;border-top:1px solid var(--accent);margin:26px 0}
+nav.toc ol{padding-left:20px}
+nav.toc a{color:var(--accent);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+.filter{margin:12px 0}
+.filter input{width:100%;padding:8px 10px;font-size:14px;border:1px solid #999;font-family:inherit}
+details.src{border:1px solid #bbb;margin:8px 0}
+details.src summary{cursor:pointer;padding:8px 10px;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+details.src pre{margin:0;padding:12px;overflow:auto;font-size:12.5px;line-height:1.5}
+.copybtn{font-family:Arial,Helvetica,sans-serif;font-size:12px;margin:0 0 8px 12px;padding:4px 10px;border:1px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer}
+ul.verify{list-style:none;padding:0}
+ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
+@media (max-width:480px){h1{font-size:23px}.page{padding:18px 14px 48px}}
+@media print{
+  @page{margin:18mm 15mm}
+  .filter,.copybtn{display:none !important}
+  body{background:#fff}
+  details.src{break-inside:avoid}
+  .fig{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="cover" id="cover">
+<div class="prog">KV SKILLS 2026 &middot; KOLEJ VOKASIONAL, PERINGKAT KEBANGSAAN KALI KE-10 &middot; WEB TECHNOLOGY &middot; MODUL C (6 JAM)</div>
+<h1>KvSkills One Page Report: Module C Technical Study Guide</h1>
+<div class="mono">Laravel 12 &middot; PHP 8 &middot; MySQL (XAMPP) &middot; Total 50.00 marks &middot; 2026-09-10</div>
+</div>
+<h2>Abstract</h2>
+<p>This guide distills two sources — the 12-page Module C practical paper and the 847-line complete build guide — into a single technical reference for implementing the KvSkills One Page Report backend (Laravel 12, PHP 8, MySQL on XAMPP) within 6 hours. It preserves every gradable requirement verbatim: four database tables including the undocumented report <span class="mono">status</span> field, eight screens with routes and redirects, and the 600-pixel photo rule. Use the Contents to locate a section, read the spec table first, and open disclosure blocks only for full copy-paste code.</p>
+<nav class="toc" id="contents"><h2>Contents</h2>
+<ol>
+<li><a href="#s1">1. Mission and scope</a></li>
+<li><a href="#s2">2. Marking scheme C1&ndash;C10</a></li>
+<li><a href="#s3">3. Environment and setup</a></li>
+<li><a href="#s4">4. Database design</a></li>
+<li><a href="#s5">5. System design (C1, C3&ndash;C9)</a></li>
+<li><a href="#s6">6. Routes</a></li>
+<li><a href="#s7">7. Verification and battle plan</a></li>
+<li><a href="#appendix">Appendix A. Pitfalls and file map</a></li>
+<li><a href="#references">References</a></li>
+</ol>
+<div class="filter"><input id="q" type="text" placeholder="Filter sections by heading text"></div>
+</nav>
+<h2>Nomenclature</h2>
+<table class="spec nomen"><tr><th>Term</th><th>Definition</th></tr>
+<tr><td>Role</td><td>0 = user (redirects to /reports); 1 = admin (redirects to /users)</td></tr>
+<tr><td>Status</td><td>0 = public (listed in One Page Report); 1 = private (hidden)</td></tr>
+<tr><td>DB</td><td>kvskill on 127.0.0.1:3306, user root, blank password, utf8mb4_unicode_ci</td></tr>
+<tr><td>Logins</td><td>Admin / password; Alice / password; Bob / password (capital A)</td></tr>
+<tr><td>Submit</td><td>C:\xampp\htdocs\YOUR_IC_Module_C (folder name uses competitor IC)</td></tr>
+</table>
+<hr class="sec">
+<!-- TASK2: sections s1+s2 -->
+<!-- TASK3: sections s3+s4+s5 -->
+<!-- TASK4: sections s6+s7+appendix+references+script -->
+</div>
+</body>
+</html>
