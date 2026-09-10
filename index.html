@@ -179,7 +179,64 @@ php artisan migrate</code></pre></details>
 <p>Guard <span class="mono">session role != 1 &rarr; /</span>; list <span class="mono">role 0</span> only; kategori via category_id; <span class="mono">rcount = COUNT reports by user</span>; <span class="mono">pcount = COUNT photos via report ids</span>; Delete unlinks files then deletes user (cascade clears rows).</p>
 </section>
 <hr class="sec">
-<!-- TASK4: sections s6+s7+appendix+references+script -->
+<section id="s6"><h2>6. Routes</h2>
+<div class="scroll"><table class="spec"><tr><th>Method</th><th>URI</th><th>Action</th></tr>
+<tr><td>GET</td><td class="mono">/</td><td>Auth@loginForm</td></tr>
+<tr><td>POST</td><td class="mono">/login</td><td>Auth@login</td></tr>
+<tr><td>GET</td><td class="mono">/logout</td><td>Auth@logout (no UI)</td></tr>
+<tr><td>GET/POST</td><td class="mono">/register</td><td>Auth@registerForm/register</td></tr>
+<tr><td>GET</td><td class="mono">/reports</td><td>Report@index (public + non-empty)</td></tr>
+<tr><td>GET</td><td class="mono">/reports/{id}</td><td>Report@show</td></tr>
+<tr><td>GET/POST</td><td class="mono">/my-reports</td><td>Report@my/store (&rarr; /manage/{newId})</td></tr>
+<tr><td>POST</td><td class="mono">/my-reports/{id}/delete</td><td>Report@destroy</td></tr>
+<tr><td>GET/POST</td><td class="mono">/manage/{id}</td><td>Report@manage/update (&rarr; /my-reports)</td></tr>
+<tr><td>POST</td><td class="mono">/manage/{id}/photos</td><td>Photo@upload (FormData photos[])</td></tr>
+<tr><td>DELETE</td><td class="mono">/photos/{id}</td><td>Photo@del</td></tr>
+<tr><td>GET</td><td class="mono">/users</td><td>User@index (role 1 only)</td></tr>
+<tr><td>POST</td><td class="mono">/users/{id}/delete</td><td>User@destroy</td></tr>
+</table></div>
+</section>
+<section id="s7"><h2>7. Verification and battle plan</h2>
+<p>Work order: 0–30m XAMPP+DB+migrate+seed; 30–90m layout+auth; 90–150m One Page+Slide; 150–210m My Reports+modal+manage top; 210–300m photo AJAX+resize; 300–330m users; 330–360m judge simulation + copy to submit folder + export DB.</p>
+<ul class="verify" id="vlist">
+<li><label><input type="checkbox"> Duplicate register &rarr; Username already exists.</label></li>
+<li><label><input type="checkbox"> Wrong password &rarr; Username and password not matched.</label></li>
+<li><label><input type="checkbox"> Confirm mismatch &rarr; Password and confirm password must matched.</label></li>
+<li><label><input type="checkbox"> Private report absent from /reports; public + 1 photo present.</label></li>
+<li><label><input type="checkbox"> Empty report grey in My Reports, absent in One Page.</label></li>
+<li><label><input type="checkbox"> Slide Prev/Next + Photo X of N + highlight, no reload.</label></li>
+<li><label><input type="checkbox"> Upload via + picker and via drag-drop appends thumbs, no reload.</label></li>
+<li><label><input type="checkbox"> Uploaded files physically &le;600&times;600, ratio kept, small files not upscaled.</label></li>
+<li><label><input type="checkbox"> Drop region highlights during dragover.</label></li>
+<li><label><input type="checkbox"> Thumb click &rarr; fullscreen; overlay click closes.</label></li>
+<li><label><input type="checkbox"> Deletes remove DB row + physical file.</label></li>
+<li><label><input type="checkbox"> Reset restores; Cancel resets + closes modal.</label></li>
+<li><label><input type="checkbox"> Header/nav/main/footer + username top-right on every page.</label></li>
+<li><label><input type="checkbox"> Admin sees User|Logout; user sees One Page|My Reports|Logout.</label></li>
+<li><label><input type="checkbox"> Logout has no UI and lands on /; guests hitting /reports land on /.</label></li>
+<li><label><input type="checkbox"> Submit folder + DB export done.</label></li>
+</ul>
+<p class="mono" id="vcount">0 / 16 checks</p>
+</section>
+<section id="appendix"><h2>Appendix A. Pitfalls and file map</h2>
+<p>1. Missing status loses C6/C7. 2. <span class="mono">Admin</span> capital A; hash with <span class="mono">Hash::make</span>, check with <span class="mono">Hash::check</span>. 3. <span class="mono">SESSION_DRIVER=file</span>. 4. <span class="mono">@csrf</span> + <span class="mono">X-CSRF-TOKEN</span> on fetch. 5. Cascade in migrations + manual unlink. 6. <span class="mono">object-fit:cover</span> for thumbs only. 7. Paper typos: Gallery/Albums/Slide = One Page/Reports. 8. Kategori display-only from Category_Id. 9. Date input type=date. 10. Submit to <span class="mono">C:\xampp\htdocs\YOUR_IC_Module_C</span>.</p>
+<p>Files (~17): 8 views (layout, login, register, onepage, slide, myreports, manage, users) + 4 controllers (Auth, Report, Photo, User) + routes/web.php + 4 migrations + 1 seeder + 4 models + public/uploads.</p>
+</section>
+<section id="references"><h2>References</h2>
+<p>[1] Module C practical paper, 12 pp. (1784452379_C1 WEB_TECHNOLOGY_FINAL_MODULE C.pdf). [2] Module C complete build guide, 847 lines (KVSkills_Module_C_Complete_Guide.md).</p>
+</section>
+<script>
+(function(){
+var q=document.getElementById('q');
+if(q){q.addEventListener('input',function(){var v=q.value.toLowerCase();document.querySelectorAll('section[id]').forEach(function(s){s.style.display=s.innerText.toLowerCase().indexOf(v)>-1?'':'none';});});}
+document.querySelectorAll('details.src').forEach(function(d){var b=document.createElement('button');b.className='copybtn';b.textContent='Copy';b.onclick=function(){var t=d.querySelector('pre').innerText;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy';},1200);});}else{var r=document.createRange();r.selectNodeContents(d.querySelector('pre'));var s=getSelection();s.removeAllRanges();s.addRange(r);}};d.appendChild(b);});
+var boxes=Array.prototype.slice.call(document.querySelectorAll('#vlist input'));var c=document.getElementById('vcount');
+function upd(){var n=boxes.filter(function(b){return b.checked;}).length;if(c)c.textContent=n+' / '+boxes.length+' checks';try{localStorage.setItem('kv-ntrs',JSON.stringify(boxes.map(function(b){return b.checked;})));}catch(e){}}
+boxes.forEach(function(b){b.addEventListener('change',upd);});
+try{var s=JSON.parse(localStorage.getItem('kv-ntrs')||'[]');boxes.forEach(function(b,i){b.checked=!!s[i];});}catch(e){}
+upd();
+})();
+</script>
 </div>
 </body>
 </html>
