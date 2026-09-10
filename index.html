@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KvSkills One Page Report — Module C Technical Study Guide (KV Skills 2026)</title>
 <style>
-:root{--ink:#111;--accent:#1b2a6b;--muted:#555;--max:68ch}
+:root{--ink:#111;--accent:#1b2a6b;--rule:#1b2a6b;--muted:#555;--max:68ch}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55;background:#fff}
@@ -54,7 +54,7 @@ ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
 <h1>KvSkills One Page Report: Module C Technical Study Guide</h1>
 <div class="mono">Laravel 12 &middot; PHP 8 &middot; MySQL (XAMPP) &middot; Total 50.00 marks &middot; 2026-09-10</div>
 </div>
-<h2>Abstract</h2>
+<h2 id="abstract">Abstract</h2>
 <p>This guide distills two sources — the 12-page Module C practical paper and the 847-line complete build guide — into a single technical reference for implementing the KvSkills One Page Report backend (Laravel 12, PHP 8, MySQL on XAMPP) within 6 hours. It preserves every gradable requirement verbatim: four database tables including the undocumented report <span class="mono">status</span> field, eight screens with routes and redirects, and the 600-pixel photo rule. Use the Contents to locate a section, read the spec table first, and open disclosure blocks only for full copy-paste code.</p>
 <nav class="toc" id="contents"><h2>Contents</h2>
 <ol>
@@ -70,7 +70,7 @@ ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
 </ol>
 <div class="filter"><input id="q" type="text" placeholder="Filter sections by heading text"></div>
 </nav>
-<h2>Nomenclature</h2>
+<h2 id="nomenclature">Nomenclature</h2>
 <table class="spec nomen"><tr><th>Term</th><th>Definition</th></tr>
 <tr><td>Role</td><td>0 = user (redirects to /reports); 1 = admin (redirects to /users)</td></tr>
 <tr><td>Status</td><td>0 = public (listed in One Page Report); 1 = private (hidden)</td></tr>
