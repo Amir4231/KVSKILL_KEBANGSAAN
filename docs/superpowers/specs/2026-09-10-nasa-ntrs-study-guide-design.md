@@ -18,7 +18,7 @@ Approach: A — Single static document, NTRS typesetting
 - Banned: gradients, shadows, rounded cards, emojis, glow, progress bars, badges.
 - Headings numbered (1.0, 1.1); horizontal rules between major sections.
 - Tables: top/bottom rules only, right-aligned numeric columns (marks, counts).
-- Figures labeled `Figure C2–C13` / `Table 1–10` matching the PDF; terse caption + requirement list under each.
+- Figures keep PDF labels `Figure C2–C13`; data tables numbered sequentially `Table 1–N` in the new document; terse caption + requirement list under each.
 - Code: spec table visible; full file inside `<details><summary>` showing filename + line count. Never dump code inline.
 - Mobile: measure full-width; wide tables get horizontal scroll with sticky first column; no other layout change.
 
@@ -48,7 +48,7 @@ Approach: A — Single static document, NTRS typesetting
 - Responsive via fluid measure + in-table horizontal scroll only.
 - Print: `@page` margins; `break-inside: avoid` on figures.
 - Vercel: static deploy, no config, served as `/`.
-- Acceptance checks: (a) JS disabled → all spec readable; (b) 360px viewport → no page-level horizontal scroll; (c) print-to-PDF → checklist + code print expanded; (d) verbatim spot-check — `Username and password not matched.`, `600`, `CompetitorID_Module_C` each present exactly once in spec tables.
+- Acceptance checks: (a) JS disabled → all spec readable; (b) 360px viewport → no page-level horizontal scroll; (c) print-to-PDF → checklist + code print expanded; (d) verbatim spot-check — `Username and password not matched.`, `600`, `CompetitorID_Module_C` each present verbatim in the spec body.
 
 ## Out of scope
 
