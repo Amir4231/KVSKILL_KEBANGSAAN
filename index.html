@@ -25,6 +25,7 @@ table.spec td.num,table.spec th.num{text-align:right;font-variant-numeric:tabula
 .scroll table{min-width:560px}
 .fig{border:1px solid #ccc;padding:10px 12px;margin:12px 0;break-inside:avoid}
 .fig .cap{font-family:Arial,Helvetica,sans-serif;font-size:12px;color:var(--muted);margin-top:6px}
+.warn{border-left:4px solid #c00;background:#fef2f2;padding:10px 12px;margin:12px 0;font-size:14px}
 hr.sec{border:0;border-top:1px solid var(--accent);margin:26px 0}
 nav.toc ol{padding-left:20px}
 nav.toc a{color:var(--accent);text-decoration:none}
@@ -55,11 +56,11 @@ ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
 <div class="cover" id="cover">
 <div class="prog" data-ms='KV SKILLS 2026 &middot; KOLEJ VOKASIONAL, PERINGKAT KEBANGSAAN KALI KE-10 &middot; TEKNOLOGI WEB &middot; MODUL C (6 JAM)'>KV SKILLS 2026 &middot; KOLEJ VOKASIONAL, PERINGKAT KEBANGSAAN KALI KE-10 &middot; WEB TECHNOLOGY &middot; MODUL C (6 JAM)</div>
 <h1 data-ms='KvSkills One Page Report: Panduan Kajian Teknikal Modul C'>KvSkills One Page Report: Module C Technical Study Guide</h1>
-<div class="mono">Laravel 12 &middot; PHP 8 &middot; MySQL (XAMPP) &middot; Total 50.00 marks &middot; 2026-09-10</div>
+<div class="mono">Laravel 12 &middot; PHP 8 &middot; MySQL (XAMPP) &middot; Total 50.00 marks &middot; 2026-09-11</div>
 <div class="lang"><button id="lang-ms" type="button">BM</button> <button id="lang-en" type="button">EN</button></div>
 </div>
 <h2 id="abstract" data-ms='Abstrak'>Abstract</h2>
-<p data-ms='Panduan ini memadatkan dua sumber — kertas praktikal Modul C setebal 12 halaman dan panduan bina lengkap 847 baris — menjadi satu rujukan teknikal untuk melaksanakan backend KvSkills One Page Report (Laravel 12, PHP 8, MySQL dalam XAMPP) dalam masa 6 jam. Ia mengekalkan setiap keperluan pemarkahan secara verbatim: empat jadual pangkalan data termasuk medan <span class="mono">status</span> yang tidak didokumenkan, lapan skrin dengan route dan redirect, serta peraturan foto 600-piksel. Gunakan Contents untuk mencari bahagian, baca jadual spec dahulu, dan buka blok disclosure hanya untuk kod salin-tampal yang lengkap.'>This guide distills two sources — the 12-page Module C practical paper and the 847-line complete build guide — into a single technical reference for implementing the KvSkills One Page Report backend (Laravel 12, PHP 8, MySQL on XAMPP) within 6 hours. It preserves every gradable requirement verbatim: four database tables including the undocumented report <span class="mono">status</span> field, eight screens with routes and redirects, and the 600-pixel photo rule. Use the Contents to locate a section, read the spec table first, and open disclosure blocks only for full copy-paste code.</p>
+<p data-ms='Panduan ini memadatkan dua sumber — kertas praktikal Modul C setebal 12 halaman dan panduan bina lengkap 1031 baris — menjadi satu rujukan teknikal untuk melaksanakan backend KvSkills One Page Report (Laravel 12, PHP 8, MySQL dalam XAMPP) dalam masa 6 jam. Ia mengekalkan setiap keperluan pemarkahan secara verbatim: empat jadual pangkalan data termasuk medan <span class="mono">status</span> yang tidak didokumenkan, lapan skrin dengan route dan redirect, serta peraturan foto 600-piksel. Semua blok disclosure di bawah mengandungi kod lengkap salin-tampal (bukan ringkasan) yang selari sebijik dengan panduan bina. Gunakan Contents untuk mencari bahagian, baca jadual spec dahulu, dan buka blok disclosure hanya untuk kod.'>This guide distills two sources — the 12-page Module C practical paper and the 1031-line complete build guide — into a single technical reference for implementing the KvSkills One Page Report backend (Laravel 12, PHP 8, MySQL on XAMPP) within 6 hours. It preserves every gradable requirement verbatim: four database tables including the undocumented report <span class="mono">status</span> field, eight screens with routes and redirects, and the 600-pixel photo rule. Every disclosure block below holds full copy-paste code (not summaries) aligned line-for-line with the build guide. Use the Contents to locate a section, read the spec table first, and open disclosure blocks only for code.</p>
 <nav class="toc" id="contents"><h2 data-ms='Kandungan'>Contents</h2>
 <ol>
 <li><a href="#s1" data-ms='Misi dan skop'>Mission and scope</a></li>
@@ -115,14 +116,18 @@ ul.verify li{padding:6px 0;border-bottom:1px dotted #bbb;font-size:14px}
 <hr class="sec">
 <section id="s3"><h2 data-ms='3. Persekitaran dan persediaan'>3. Environment and setup</h2>
 <p data-ms='XAMPP Apache + MySQL hijau; cipta pangkalan data <span class="mono">kvskill</span> (<span class="mono">utf8mb4_unicode_ci</span>, root / kosong). Jangan jalankan <span class="mono">composer create-project</span> (Laravel pra-muat turun, tiada rangkaian). Nyahzip fail media ke Desktop untuk ujian muat naik.'>XAMPP Apache + MySQL green; create database <span class="mono">kvskill</span> (<span class="mono">utf8mb4_unicode_ci</span>, root / blank). Do not run <span class="mono">composer create-project</span> (pre-downloaded Laravel, no network). Unzip media files to Desktop for upload tests.</p>
-<details class="src"><summary>.env — 7 lines (DB + session)</summary><pre><code>DB_CONNECTION=mysql
+<details class="src"><summary>.env — 7 lines (DB + session) — copy these 6 + 1</summary><pre><code>DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=kvskill
 DB_USERNAME=root
 DB_PASSWORD=
 SESSION_DRIVER=file</code></pre></details>
-<p data-ms='Kemudian <span class="mono">php artisan key:generate</span>; cipta <span class="mono">public/uploads</span>; hidang dengan <span class="mono">php artisan serve</span> (http://127.0.0.1:8000). Sahkan PHP 8.2+ dan Laravel 12.x melalui <span class="mono">php --version</span> / <span class="mono">php artisan --version</span>.'>Then <span class="mono">php artisan key:generate</span>; create <span class="mono">public/uploads</span>; serve with <span class="mono">php artisan serve</span> (http://127.0.0.1:8000). Verify PHP 8.2+ and Laravel 12.x via <span class="mono">php --version</span> / <span class="mono">php artisan --version</span>.</p>
+<p data-ms='Kemudian <span class="mono">php artisan key:generate</span>; cipta <span class="mono">public/uploads</span> awal-awal (jangan tunggu Part 9); hidang dengan <span class="mono">php artisan serve</span> (http://127.0.0.1:8000). Sahkan PHP 8.2+ dan Laravel 12.x melalui <span class="mono">php --version</span> / <span class="mono">php artisan --version</span>.'>Then <span class="mono">php artisan key:generate</span>; create <span class="mono">public/uploads</span> early (do not wait for Part 9); serve with <span class="mono">php artisan serve</span> (http://127.0.0.1:8000). Verify PHP 8.2+ and Laravel 12.x via <span class="mono">php --version</span> / <span class="mono">php artisan --version</span>.</p>
+<details class="src"><summary>setup commands — run in order</summary><pre><code>php --version
+php artisan --version
+php artisan key:generate
+New-Item -ItemType Directory -Path "public\uploads" -Force</code></pre></details>
 </section>
 <section id="s4"><h2 data-ms='4. Reka bentuk pangkalan data'>4. Database design</h2>
 <div class="fig" data-ms='<b>Nota.</b> Kertas soalan tiada medan <span class="mono">status</span> dalam Reports tetapi halaman kemudian memerlukannya. Tambah <span class="mono">status tinyint default 0</span> (0 public, 1 private) atau hilang markah C6/C7.<div class="cap">Anomali skema, disahkan terhadap keperluan modal dan manage.</div>'><b>Note.</b> The paper omits <span class="mono">status</span> in Reports but later pages require it. Add <span class="mono">status tinyint default 0</span> (0 public, 1 private) or lose C6/C7 marks.<div class="cap">Schema anomaly, confirmed against modal and manage requirements.</div></div>
@@ -133,54 +138,608 @@ SESSION_DRIVER=file</code></pre></details>
 <tr><td class="mono">photos</td><td>id; report_id FK; path varchar(255)</td><td>report_id cascade; path e.g. uploads/xxx.jpg</td></tr>
 </table></div>
 <p data-ms='Cascade delete (user&rarr;reports&rarr;photos) memenuhi keperluan padam tanpa kod tambahan; fail fizikal masih perlu di-unlink secara manual.'>Cascade deletes (user&rarr;reports&rarr;photos) satisfy delete requirements without extra code; physical files still unlinked manually.</p>
-<details class="src"><summary>migrations — 4 × up() (~45 lines)</summary><pre><code>php artisan make:migration create_categories_table
+<div class="warn" data-ms='AMARAN: Padam semua migration default 0001_* dahulu (WAJIB). Kalau keep, migrate akan error Table users already exists. Cipta 4 migration satu-persatu ikut turutan categories&rarr;users&rarr;reports&rarr;photos. JANGAN run make:seeder DatabaseSeeder (file memang dah ada — akan error Seeder already exists). JANGAN run make:model User (file memang dah ada).'>WARNING: Delete all default 0001_* migrations first (MANDATORY). If kept, migrate fails with Table users already exists. Create the 4 migrations one by one in order categories&rarr;users&rarr;reports&rarr;photos. Do NOT run make:seeder DatabaseSeeder (file already exists — errors). Do NOT run make:model User (file already exists).</div>
+<details class="src"><summary>migrations — create one by one, then paste each up()/down()</summary><pre><code>php artisan make:migration create_categories_table
 php artisan make:migration create_users_table
 php artisan make:migration create_reports_table
 php artisan make:migration create_photos_table
-// categories: id; string category_name 255; timestamps
-// users: id; username unique; password; tinyInteger role default 0;
-//   foreignId category_id nullable -&gt; constrained categories nullOnDelete; timestamps
-// reports: id; foreignId user_id -&gt; users cascade;
-//   foreignId category_id nullable -&gt; categories nullOnDelete;
-//   title 255; description 255; date; tinyInteger status default 0; timestamps
-// photos: id; foreignId report_id -&gt; reports cascade; path 255; timestamps
-php artisan migrate</code></pre></details>
-<details class="src"><summary>DatabaseSeeder.php (~30 lines)</summary><pre><code>// categories: Web Technology, Patisserie and Confectionery,
-//   Graphic Design, IT Network Administration (insertOrIgnore)
-// $web/$pat ids looked up; users insertOrIgnore:
-// 1 Admin role 1 category null / 2 Alice role 0 web / 3 Bob role 0 pat
-// all password Hash::make('password')
-// php artisan db:seed</code></pre></details>
-<p data-ms='Model: Category <span class="mono">fillable=[category_name]</span>; User <span class="mono">fillable=[username,password,role,category_id], hidden=[password]</span>; Report <span class="mono">fillable=[user_id,category_id,title,description,date,status], user() belongsTo, photos() hasMany</span>; Photo <span class="mono">fillable=[report_id,path]</span>.'>Models: Category <span class="mono">fillable=[category_name]</span>; User <span class="mono">fillable=[username,password,role,category_id], hidden=[password]</span>; Report <span class="mono">fillable=[user_id,category_id,title,description,date,status], user() belongsTo, photos() hasMany</span>; Photo <span class="mono">fillable=[report_id,path]</span>.</p>
+
+// 1. categories up()/down():
+public function up(): void {
+  Schema::create('categories', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;string('category_name', 255);
+    $table-&gt;timestamps();
+  });
+}
+public function down(): void {
+  Schema::dropIfExists('categories');
+}
+
+// 2. users up()/down():
+public function up(): void {
+  Schema::create('users', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;string('username', 255)-&gt;unique();
+    $table-&gt;string('password', 255);
+    $table-&gt;tinyInteger('role')-&gt;default(0); // 0=user 1=admin
+    $table-&gt;foreignId('category_id')-&gt;nullable()-&gt;constrained('categories')-&gt;nullOnDelete();
+    $table-&gt;timestamps();
+  });
+}
+public function down(): void {
+  Schema::dropIfExists('users');
+}
+
+// 3. reports up()/down():
+public function up(): void {
+  Schema::create('reports', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;foreignId('user_id')-&gt;constrained('users')-&gt;onDelete('cascade');
+    $table-&gt;foreignId('category_id')-&gt;nullable()-&gt;constrained('categories')-&gt;nullOnDelete();
+    $table-&gt;string('title', 255);
+    $table-&gt;string('description', 255);
+    $table-&gt;date('date');
+    $table-&gt;tinyInteger('status')-&gt;default(0); // 0=public 1=private
+    $table-&gt;timestamps();
+  });
+}
+public function down(): void {
+  Schema::dropIfExists('reports');
+}
+
+// 4. photos up()/down():
+public function up(): void {
+  Schema::create('photos', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;foreignId('report_id')-&gt;constrained('reports')-&gt;onDelete('cascade');
+    $table-&gt;string('path', 255);
+    $table-&gt;timestamps();
+  });
+}
+public function down(): void {
+  Schema::dropIfExists('photos');
+}
+
+php artisan migrate:fresh</code></pre></details>
+<details class="src"><summary>DatabaseSeeder.php — FULL FILE (edit existing file, do NOT make:seeder)</summary><pre><code>&lt;?php
+namespace Database\Seeders;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+class DatabaseSeeder extends Seeder {
+  public function run(): void {
+    $cats = ['Web Technology','Patisserie and Confectionery','Graphic Design','IT Network Administration'];
+    foreach ($cats as $c) {
+      DB::table('categories')-&gt;insertOrIgnore(['category_name'=&gt;$c,'created_at'=&gt;now(),'updated_at'=&gt;now()]);
+    }
+    $webId = DB::table('categories')-&gt;where('category_name','Web Technology')-&gt;value('id');
+    $patId = DB::table('categories')-&gt;where('category_name','Patisserie and Confectionery')-&gt;value('id');
+
+    DB::table('users')-&gt;insertOrIgnore([
+      ['id'=&gt;1,'username'=&gt;'Admin','password'=&gt;Hash::make('password'),'role'=&gt;1,'category_id'=&gt;null,'created_at'=&gt;now(),'updated_at'=&gt;now()],
+      ['id'=&gt;2,'username'=&gt;'Alice','password'=&gt;Hash::make('password'),'role'=&gt;0,'category_id'=&gt;$webId,'created_at'=&gt;now(),'updated_at'=&gt;now()],
+      ['id'=&gt;3,'username'=&gt;'Bob','password'=&gt;Hash::make('password'),'role'=&gt;0,'category_id'=&gt;$patId,'created_at'=&gt;now(),'updated_at'=&gt;now()],
+    ]);
+  }
+}
+// run: php artisan db:seed
+// rescue from scratch: php artisan migrate:fresh --seed</code></pre></details>
+<details class="src"><summary>Models — 4 FULL FILES (make Category/Report/Photo only; edit existing User)</summary><pre><code>php artisan make:model Category
+php artisan make:model Report
+php artisan make:model Photo
+// User already exists — open app/Models/User.php and replace.
+
+// app/Models/Category.php
+&lt;?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+class Category extends Model {
+  protected $fillable = ['category_name'];
+}
+
+// app/Models/User.php
+&lt;?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+class User extends Model {
+  protected $fillable = ['username','password','role','category_id'];
+  protected $hidden = ['password'];
+}
+
+// app/Models/Report.php
+&lt;?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+class Report extends Model {
+  protected $fillable = ['user_id','category_id','title','description','date','status'];
+  public function user(){ return $this-&gt;belongsTo(User::class); }
+  public function photos(){ return $this-&gt;hasMany(Photo::class); }
+}
+
+// app/Models/Photo.php
+&lt;?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+class Photo extends Model {
+  protected $fillable = ['report_id','path'];
+}</code></pre></details>
+<p data-ms='Verify: categories ada 4 row, users ada 3 row (Admin, Alice, Bob). Kalau error rujuk jadual troubleshoot dalam panduan bina (Seeder already exists / Table users already exists / Unknown column username / Foreign key fails).'>Verify: categories has 4 rows, users has 3 rows (Admin, Alice, Bob). On error see the build-guide troubleshoot table (Seeder already exists / Table users already exists / Unknown column username / Foreign key fails).</p>
 </section>
 <section id="s5"><h2 data-ms='5. Reka bentuk sistem (C1, C3&ndash;C9)'>5. System design (C1, C3&ndash;C9)</h2>
 <h3 data-ms='5.1 Kontrak susun atur'>5.1 Layout contract</h3>
 <p data-ms='Satu <span class="mono">layout.blade.php</span> digunakan oleh semua view; <span class="mono">&lt;style&gt;</span> biasa sahaja (tiada Vite/Tailwind); wajib <span class="mono">&lt;meta name=&quot;csrf-token&quot;&gt;</span> untuk AJAX; thumb <span class="mono">object-fit:cover</span>; imej tengah kekalkan nisbah asal.'>One <span class="mono">layout.blade.php</span> extended by all views; plain <span class="mono">&lt;style&gt;</span> only (no Vite/Tailwind); mandatory <span class="mono">&lt;meta name="csrf-token"&gt;</span> for AJAX; thumbs <span class="mono">object-fit:cover</span>; middle image keeps original ratio.</p>
+<details class="src"><summary>layout.blade.php — FULL FILE (all pages extend this)</summary><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;meta name="csrf-token" content="{{ csrf_token() }}"&gt;
+&lt;title&gt;KvSkills One Page Report&lt;/title&gt;
+&lt;style&gt;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+header{background:#1e40af;color:#fff;text-align:center;padding:18px;font-size:22px;font-weight:bold}
+nav{background:#4f46e5;color:#fff;display:flex;gap:20px;padding:10px 40px;align-items:center}
+nav a{color:#fff;text-decoration:none;font-size:14px}
+nav .spacer{flex:1}
+nav .user{font-size:14px}
+main{background:#f1f1f1;min-height:70vh;padding:25px 60px}
+footer{background:#1e40af;color:#fff;text-align:center;padding:15px;font-size:13px}
+.card{background:#fff;border:1px solid #ddd;border-radius:6px;overflow:hidden;width:250px}
+.card img.thumb{width:100%;height:200px;object-fit:cover;display:block}
+.card .body{padding:10px}
+.grid{display:flex;gap:20px;flex-wrap:wrap}
+.btn{background:#3b82f6;color:#fff;border:0;padding:8px 20px;border-radius:5px;cursor:pointer}
+.btn2{background:#4f46e5;color:#fff;border:0;padding:8px 20px;border-radius:5px;cursor:pointer}
+.box{background:#fff;border:1px solid #333;border-radius:8px;padding:30px;max-width:500px;margin:30px auto}
+.box input,.box select,.box textarea{width:100%;padding:8px;margin:6px 0 12px;border:1px solid #999}
+label{font-size:13px;color:#555}
+table{width:100%;background:#fff;border-collapse:collapse}
+th{background:#1e3a8a;color:#fff;padding:10px}
+td{border:1px solid #1e3a8a;padding:10px;text-align:center}
+.sq{width:150px;height:150px;object-fit:cover;border-radius:4px}
+.plus{width:150px;height:190px;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;background:#f9f9f9}
+.xbtn{position:absolute;top:5px;right:5px;background:red;color:#fff;border:0;width:22px;height:22px;border-radius:3px;cursor:pointer}
+.wrap{position:relative;width:150px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center}
+.modal.open{display:flex}
+.modal .inner{background:#fff;padding:20px;width:400px;border-radius:6px}
+.error{background:#fee;color:#c00;padding:8px;margin-bottom:10px;font-size:13px}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;KvSKILLs One Page Report&lt;/header&gt;
+&lt;nav&gt;
+  @if(!session('user_id'))
+    &lt;a href="/"&gt;Index&lt;/a&gt;
+    &lt;a href="/register"&gt;Register&lt;/a&gt;
+  @elseif(session('role')==1)
+    &lt;a href="/users"&gt;User&lt;/a&gt;
+    &lt;a href="/logout"&gt;Logout&lt;/a&gt;
+    &lt;div class="spacer"&gt;&lt;/div&gt;&lt;span class="user"&gt;{{ session('username') }}&lt;/span&gt;
+  @else
+    &lt;a href="/reports"&gt;One Page Report&lt;/a&gt;
+    &lt;a href="/my-reports"&gt;My Reports&lt;/a&gt;
+    &lt;a href="/logout"&gt;Logout&lt;/a&gt;
+    &lt;div class="spacer"&gt;&lt;/div&gt;&lt;span class="user"&gt;{{ session('username') }}&lt;/span&gt;
+  @endif
+&lt;/nav&gt;
+&lt;main&gt;@yield('content')&lt;/main&gt;
+&lt;footer&gt;KvSKILLs One Page Report © 2026&lt;/footer&gt;
+@yield('js')
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></details>
 <h3 data-ms='5.2 Auth (C3)'>5.2 Auth (C3)</h3>
-<p data-ms='Log masuk sahkan required; <span class="mono">Hash::check</span>; tidak padan kembalikan <i>Username and password not matched.</i> Daftar sahkan <span class="mono">username required|unique</span>, <span class="mono">confirm required|same:password</span> (<i>Password and confirm password must matched.</i>), <span class="mono">category_id required|exists</span>; pendua kembalikan <i>Username already exists.</i> Berjaya &rarr; <span class="mono">/</span> dengan <i>Registered. Please login.</i>'>Login validates required; <span class="mono">Hash::check</span>; mismatch returns <i>Username and password not matched.</i> Register validates <span class="mono">username required|unique</span>, <span class="mono">confirm required|same:password</span> (<i>Password and confirm password must matched.</i>), <span class="mono">category_id required|exists</span>; duplicate returns <i>Username already exists.</i> Success &rarr; <span class="mono">/</span> with <i>Registered. Please login.</i></p>
-<details class="src"><summary>AuthController.php (~45 lines)</summary><pre><code>// loginForm -&gt; view login
-// login: validate username+password required; find by username;
-//   !user || !Hash::check -&gt; back with 'Username and password not matched.'
-//   session user_id/username/role; role 1 -&gt; /users else /reports
-// logout: session flush -&gt; /
-// registerForm: Category::all -&gt; view register
-// register: validate + unique/same/exists with custom messages;
-//   User::create username, Hash::make password, role 0, category_id -&gt; / with ok</code></pre></details>
+<p data-ms='Log masuk sahkan required; <span class="mono">Hash::check</span>; tidak padan kembalikan <i>Username and password not matched.</i> Daftar sahkan <span class="mono">username required|unique</span>, <span class="mono">confirm required|same:password</span> (<i>Password and confirm password must matched.</i>), <span class="mono">category_id required|exists</span>; pendua kembalikan <i>Username already exists.</i> Berjaya &rarr; <span class="mono">/</span> dengan <i>Registered. Please login.</i> Login view mesti papar kedua-dua session error dan $errors (kegagalan validate field kosong).'>Login validates required; <span class="mono">Hash::check</span>; mismatch returns <i>Username and password not matched.</i> Register validates <span class="mono">username required|unique</span>, <span class="mono">confirm required|same:password</span> (<i>Password and confirm password must matched.</i>), <span class="mono">category_id required|exists</span>; duplicate returns <i>Username already exists.</i> Success &rarr; <span class="mono">/</span> with <i>Registered. Please login.</i> Login view must show both session error and $errors (empty-field validate fails).</p>
+<details class="src"><summary>AuthController.php — FULL FILE</summary><pre><code>&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Category;
+use Illuminate\Support\Facades\Hash;
+
+class AuthController extends Controller {
+  public function loginForm(){ return view('login'); }
+
+  public function login(Request $r){
+    $r-&gt;validate(['username'=&gt;'required','password'=&gt;'required']);
+    $u = User::where('username',$r-&gt;username)-&gt;first();
+    if(!$u || !Hash::check($r-&gt;password,$u-&gt;password)){
+      return back()-&gt;with('error','Username and password not matched.');
+    }
+    session(['user_id'=&gt;$u-&gt;id,'username'=&gt;$u-&gt;username,'role'=&gt;$u-&gt;role]);
+    if($u-&gt;role==1) return redirect('/users');
+    return redirect('/reports');
+  }
+
+  public function logout(){
+    session()-&gt;flush();
+    return redirect('/');
+  }
+
+  public function registerForm(){
+    $cats = Category::all();
+    return view('register',compact('cats'));
+  }
+
+  public function register(Request $r){
+    $r-&gt;validate([
+      'username'=&gt;'required|unique:users,username',
+      'password'=&gt;'required',
+      'confirm'=&gt;'required|same:password',
+      'category_id'=&gt;'required|exists:categories,id',
+    ],['username.unique'=&gt;'Username already exists.','confirm.same'=&gt;'Password and confirm password must matched.']);
+    User::create([
+      'username'=&gt;$r-&gt;username,
+      'password'=&gt;Hash::make($r-&gt;password),
+      'role'=&gt;0,
+      'category_id'=&gt;$r-&gt;category_id,
+    ]);
+    return redirect('/')-&gt;with('ok','Registered. Please login.');
+  }
+}</code></pre></details>
+<details class="src"><summary>login.blade.php + register.blade.php — FULL FILES</summary><pre><code>// resources/views/login.blade.php
+@extends('layout')
+@section('content')
+&lt;div class="box"&gt;
+&lt;h2 style="color:#1e3a8a;margin-bottom:15px"&gt;Index | Login&lt;/h2&gt;
+@if(session('error'))&lt;div class="error"&gt;{{ session('error') }}&lt;/div&gt;@endif
+@if($errors-&gt;any())&lt;div class="error"&gt;{{ $errors-&gt;first() }}&lt;/div&gt;@endif
+@if(session('ok'))&lt;div style="background:#dfd;padding:8px;margin-bottom:10px"&gt;{{ session('ok') }}&lt;/div&gt;@endif
+&lt;form method="POST" action="/login"&gt;@csrf
+&lt;label&gt;Username :&lt;/label&gt;&lt;input name="username" value="{{ old('username') }}" required&gt;
+&lt;label&gt;Password :&lt;/label&gt;&lt;input type="password" name="password" required&gt;
+&lt;div style="display:flex;gap:15px;margin-top:10px"&gt;
+&lt;button class="btn" style="flex:1"&gt;Login&lt;/button&gt;
+&lt;button type="reset" class="btn2"&gt;Reset&lt;/button&gt;
+&lt;/div&gt;&lt;/form&gt;&lt;/div&gt;
+@endsection
+
+// resources/views/register.blade.php
+@extends('layout')
+@section('content')
+&lt;div class="box"&gt;
+&lt;h2 style="color:#1e3a8a;margin-bottom:15px"&gt;Register&lt;/h2&gt;
+@if($errors-&gt;any())&lt;div class="error"&gt;{{ $errors-&gt;first() }}&lt;/div&gt;@endif
+&lt;form method="POST" action="/register"&gt;@csrf
+&lt;label&gt;Username :&lt;/label&gt;&lt;input name="username" value="{{ old('username') }}" required&gt;
+&lt;label&gt;Password :&lt;/label&gt;&lt;input type="password" name="password" required&gt;
+&lt;label&gt;Confirm Password :&lt;/label&gt;&lt;input type="password" name="confirm" required&gt;
+&lt;label&gt;Kategori :&lt;/label&gt;
+&lt;select name="category_id" required&gt;
+&lt;option value=""&gt;-- Pilih Kategori --&lt;/option&gt;
+@foreach($cats as $c)&lt;option value="{{ $c-&gt;id }}"&gt;{{ $c-&gt;category_name }}&lt;/option&gt;@endforeach
+&lt;/select&gt;
+&lt;div style="display:flex;gap:15px"&gt;&lt;button class="btn" style="flex:1"&gt;Register&lt;/button&gt;
+&lt;button type="reset" class="btn2"&gt;Reset&lt;/button&gt;&lt;/div&gt;
+&lt;/form&gt;&lt;/div&gt;
+@endsection</code></pre></details>
 <h3 data-ms='5.3 One Page (C4) dan Slide (C5)'>5.3 One Page (C4) and Slide (C5)</h3>
-<p data-ms='Index: <span class="mono">where status 0 + photos count &gt; 0</span>; thumb = foto pertama; tajuk + pemilik + desc 100 aksara; klik &rarr; <span class="mono">/reports/{id}</span>. Slide atas: Title/Name/Category (pemilik)/Date/Description; tengah: foto pertama sebagai lalai; bawah: thumb + Prev/Next + <i>Photo X of N</i> + highlight; thumbnail/Prev/Next dikemas kini melalui JS array + index, tanpa reload.'>Index: <span class="mono">where status 0 + photos count &gt; 0</span>; thumb = first photo; title + owner + 100-char desc; click &rarr; <span class="mono">/reports/{id}</span>. Slide top: Title/Name/Category (owner's)/Date/Description; middle: first photo default; bottom: thumbs + Prev/Next + <i>Photo X of N</i> + highlight; thumbnail/Prev/Next update via JS array + index, no reload.</p>
+<p data-ms='Index: <span class="mono">where status 0 + photos count &gt; 0</span>; thumb = foto pertama; tajuk + pemilik + desc 100 aksara (guna <span class="mono">\Illuminate\Support\Str::limit</span> full namespace); klik &rarr; <span class="mono">/reports/{id}</span>. Slide atas: Title/Name/Category (pemilik)/Date/Description; tengah: foto pertama sebagai lalai; bawah: thumb + Prev/Next + <i>Photo X of N</i> + highlight; thumbnail/Prev/Next dikemas kini melalui JS array + index, tanpa reload. Guard kosong: show() redirect ke /reports kalau 0 foto, view ada @if count&gt;0 (elak crash first()-&gt;path atas null).'>Index: <span class="mono">where status 0 + photos count &gt; 0</span>; thumb = first photo; title + owner + 100-char desc (use full <span class="mono">\Illuminate\Support\Str::limit</span> namespace); click &rarr; <span class="mono">/reports/{id}</span>. Slide top: Title/Name/Category (owner's)/Date/Description; middle: first photo default; bottom: thumbs + Prev/Next + <i>Photo X of N</i> + highlight; thumbnail/Prev/Next update via JS array + index, no reload. Empty guard: show() redirects to /reports on 0 photos, view has @if count&gt;0 (avoids first()-&gt;path crash on null).</p>
+<details class="src"><summary>ReportController.php — FULL FILE, 7 methods (paste once, covers C4+C6+C7)</summary><pre><code>&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Models\Report;
+use App\Models\Category;
+use App\Models\User;
+
+class ReportController extends Controller {
+  public function index(){
+    if(!session('user_id')) return redirect('/');
+    $reports = Report::where('status',0)-&gt;with(['user','photos'])-&gt;get()-&gt;filter(fn($r)=&gt;$r-&gt;photos-&gt;count()&gt;0);
+    return view('onepage',compact('reports'));
+  }
+
+  public function show($id){
+    if(!session('user_id')) return redirect('/');
+    $rep = Report::with(['user','photos'])-&gt;findOrFail($id);
+    if($rep-&gt;photos-&gt;count()==0){
+      return redirect('/reports');
+    }
+    $catName = $rep-&gt;user &amp;&amp; $rep-&gt;user-&gt;category_id ? Category::find($rep-&gt;user-&gt;category_id)-&gt;category_name ?? '-' : '-';
+    return view('slide',compact('rep','catName'));
+  }
+
+  public function my(){
+    if(!session('user_id')) return redirect('/');
+    $reports = Report::where('user_id',session('user_id'))-&gt;with('photos')-&gt;get();
+    $cats = Category::all();
+    return view('myreports',compact('reports','cats'));
+  }
+
+  public function store(Request $r){
+    $r-&gt;validate(['title'=&gt;'required','description'=&gt;'required','date'=&gt;'required','status'=&gt;'required|in:0,1']);
+    $u = User::find(session('user_id'));
+    $rep = Report::create([
+      'user_id'=&gt;$u-&gt;id,'category_id'=&gt;$u-&gt;category_id,
+      'title'=&gt;$r-&gt;title,'description'=&gt;$r-&gt;description,'date'=&gt;$r-&gt;date,'status'=&gt;$r-&gt;status
+    ]);
+    return redirect('/manage/'.$rep-&gt;id);
+  }
+
+  public function destroy($id){
+    $rep = Report::where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+    foreach($rep-&gt;photos as $p){ if(file_exists(public_path($p-&gt;path))) unlink(public_path($p-&gt;path)); }
+    $rep-&gt;delete();
+    return redirect('/my-reports');
+  }
+
+  public function manage($id){
+    if(!session('user_id')) return redirect('/');
+    $rep = Report::with('photos')-&gt;where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+    $catName = $rep-&gt;category_id ? Category::find($rep-&gt;category_id)-&gt;category_name ?? '-' : '-';
+    return view('manage',compact('rep','catName'));
+  }
+
+  public function update(Request $r,$id){
+    $r-&gt;validate(['title'=&gt;'required','description'=&gt;'required','date'=&gt;'required','status'=&gt;'required|in:0,1']);
+    $rep = Report::where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+    $rep-&gt;update($r-&gt;only(['title','description','date','status']));
+    return redirect('/my-reports');
+  }
+}
+// PENTING: paste file lengkap ini SEKALI di Part 5.
+// Part 6 (my/store/destroy) + Part 7 (manage/update) sudah termasuk — jangan overwrite file.</code></pre></details>
+<details class="src"><summary>onepage.blade.php + slide.blade.php — FULL FILES</summary><pre><code>// resources/views/onepage.blade.php
+@extends('layout')
+@section('content')
+&lt;h3&gt;One Page Report&lt;/h3&gt;&lt;br&gt;
+&lt;div class="grid"&gt;
+@foreach($reports as $r)
+&lt;div class="card"&gt;
+&lt;a href="/reports/{{ $r-&gt;id }}"&gt;
+&lt;img class="thumb" src="/{{ $r-&gt;photos-&gt;first()-&gt;path }}"&gt;
+&lt;/a&gt;
+&lt;div class="body"&gt;
+&lt;b&gt;{{ $r-&gt;title }}&lt;/b&gt;&lt;br&gt;
+&lt;small&gt;{{ $r-&gt;user-&gt;username }}&lt;/small&gt;&lt;br&gt;
+&lt;small style="color:#555"&gt;{{ \Illuminate\Support\Str::limit($r-&gt;description,100) }}&lt;/small&gt;
+&lt;/div&gt;&lt;/div&gt;
+@endforeach
+&lt;/div&gt;
+@endsection
+
+// resources/views/slide.blade.php
+@extends('layout')
+@section('content')
+&lt;div style="background:#fff;padding:20px;max-width:700px;margin:auto;border-radius:6px"&gt;
+&lt;p style="font-size:12px"&gt;&lt;b&gt;Title&lt;/b&gt; : {{ $rep-&gt;title }}&lt;br&gt;
+&lt;b&gt;Name&lt;/b&gt; : {{ $rep-&gt;user-&gt;username }}&lt;br&gt;
+&lt;b&gt;Category&lt;/b&gt; : {{ $catName }}&lt;br&gt;
+&lt;b&gt;Date&lt;/b&gt; : {{ $rep-&gt;date }}&lt;br&gt;
+&lt;b&gt;Description&lt;/b&gt; : {{ $rep-&gt;description }}&lt;/p&gt;
+&lt;hr&gt;&lt;br&gt;
+@if($rep-&gt;photos-&gt;count()&gt;0)
+&lt;div style="text-align:center"&gt;
+&lt;img id="big" src="/{{ $rep-&gt;photos-&gt;first()-&gt;path }}" style="max-width:100%;max-height:400px"&gt;
+&lt;div id="count"&gt;Photo 1 of {{ $rep-&gt;photos-&gt;count() }}&lt;/div&gt;&lt;br&gt;
+&lt;div style="display:flex;gap:8px;justify-content:center;align-items:center"&gt;
+&lt;button class="btn2" onclick="move(-1)"&gt;◀&lt;/button&gt;
+@foreach($rep-&gt;photos as $i=&gt;$p)
+&lt;img src="/{{ $p-&gt;path }}" class="sq thumbBtn" data-i="{{ $i }}" style="width:50px;height:50px;object-fit:cover;cursor:pointer;border:2px solid {{ $i==0?'blue':'transparent' }}"&gt;
+@endforeach
+&lt;button class="btn2" onclick="move(1)"&gt;▶&lt;/button&gt;
+&lt;/div&gt;&lt;/div&gt;
+@else
+&lt;p&gt;No photos yet.&lt;/p&gt;
+@endif
+&lt;/div&gt;
+@endsection
+@section('js')
+&lt;script&gt;
+let photos = [@foreach($rep-&gt;photos as $p)"/{{ $p-&gt;path }}",@endforeach];
+let idx = 0;
+function show(i){
+  idx = (i+photos.length)%photos.length;
+  document.getElementById('big').src = photos[idx];
+  document.getElementById('count').innerText = `Photo ${idx+1} of ${photos.length}`;
+  document.querySelectorAll('.thumbBtn').forEach((el,k)=&gt;el.style.border = k===idx?'2px solid blue':'2px solid transparent');
+}
+document.querySelectorAll('.thumbBtn').forEach(el=&gt;el.onclick=()=&gt;show(parseInt(el.dataset.i)));
+function move(d){ show(idx+d); }
+&lt;/script&gt;
+@endsection</code></pre></details>
 <h3 data-ms='5.4 My Reports (C6)'>5.4 My Reports (C6)</h3>
-<p data-ms='<span class="mono">where user_id = session</span>; kosong = kotak kelabu 150px <span class="mono">#aaa</span>; borang X <span class="mono">POST /my-reports/{id}/delete</span> unlink fail kemudian padam; + buka modal (Title/Description/Date required, Status 0/1, kategori paparan sahaja dari profil); Add cipta &rarr; <span class="mono">/manage/{newId}</span>; Cancel reset + tutup.'><span class="mono">where user_id = session</span>; empty = 150px grey <span class="mono">#aaa</span> box; X form <span class="mono">POST /my-reports/{id}/delete</span> unlinks files then deletes; + opens modal (Title/Description/Date required, Status 0/1, kategori display-only from profile); Add creates &rarr; <span class="mono">/manage/{newId}</span>; Cancel resets + closes.</p>
+<p data-ms='<span class="mono">where user_id = session</span>; kosong = kotak kelabu 150px <span class="mono">#aaa</span>; borang X <span class="mono">POST /my-reports/{id}/delete</span> unlink fail kemudian padam; + buka modal (Title/Description/Date required, Status 0/1, kategori paparan sahaja disabled dari profil); Add cipta &rarr; <span class="mono">/manage/{newId}</span>; Cancel reset + tutup. Controller tak payah sentuh — my/store/destroy sudah dalam fail lengkap 7-method di atas.'><span class="mono">where user_id = session</span>; empty = 150px grey <span class="mono">#aaa</span> box; X form <span class="mono">POST /my-reports/{id}/delete</span> unlinks files then deletes; + opens modal (Title/Description/Date required, Status 0/1, kategori display-only disabled from profile); Add creates &rarr; <span class="mono">/manage/{newId}</span>; Cancel resets + closes. No controller change — my/store/destroy are already in the 7-method file above.</p>
+<details class="src"><summary>myreports.blade.php — FULL FILE</summary><pre><code>@extends('layout')
+@section('content')
+&lt;h3&gt;Reports&lt;/h3&gt;&lt;br&gt;
+&lt;div class="grid" id="dropzone"&gt;
+@foreach($reports as $r)
+&lt;div class="wrap"&gt;
+&lt;div class="card" style="width:150px"&gt;
+&lt;a href="/manage/{{ $r-&gt;id }}"&gt;
+@if($r-&gt;photos-&gt;count()&gt;0)
+&lt;img src="/{{ $r-&gt;photos-&gt;first()-&gt;path }}" style="width:150px;height:150px;object-fit:cover"&gt;
+@else
+&lt;div style="width:150px;height:150px;background:#aaa"&gt;&lt;/div&gt;
+@endif
+&lt;/a&gt;
+&lt;div class="body" style="text-align:center;font-size:12px"&gt;&lt;b&gt;{{ $r-&gt;title }}&lt;/b&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;form method="POST" action="/my-reports/{{ $r-&gt;id }}/delete" style="position:absolute;top:5px;right:5px" onsubmit="return confirm('Delete this report?')"&gt;@csrf
+&lt;button class="xbtn"&gt;x&lt;/button&gt;&lt;/form&gt;
+&lt;/div&gt;
+@endforeach
+&lt;div class="plus" onclick="document.getElementById('m').classList.add('open')"&gt;+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="modal" id="m"&gt;&lt;div class="inner"&gt;
+&lt;h4&gt;Add Report &lt;span style="float:right;cursor:pointer" onclick="document.getElementById('m').classList.remove('open')"&gt;x&lt;/span&gt;&lt;/h4&gt;&lt;br&gt;
+&lt;form method="POST" action="/my-reports"&gt;@csrf
+&lt;label&gt;Title:&lt;/label&gt;&lt;input name="title" required style="width:100%;padding:6px"&gt;
+&lt;label&gt;Description:&lt;/label&gt;&lt;textarea name="description" required style="width:100%;padding:6px"&gt;&lt;/textarea&gt;
+&lt;label&gt;Kategori:&lt;/label&gt;
+&lt;select style="width:100%;padding:6px" disabled&gt;
+@foreach($cats as $c)&lt;option&gt;{{ $c-&gt;category_name }}&lt;/option&gt;@endforeach
+&lt;/select&gt;&lt;small&gt;Display only, saved from your profile Category_Id&lt;/small&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Date:&lt;/label&gt;&lt;input type="date" name="date" value="2026-03-31" required style="width:100%;padding:6px"&gt;
+&lt;label&gt;Status:&lt;/label&gt;&lt;select name="status" style="width:100%;padding:6px"&gt;&lt;option value="0"&gt;Public&lt;/option&gt;&lt;option value="1"&gt;Private&lt;/option&gt;&lt;/select&gt;&lt;br&gt;&lt;br&gt;
+&lt;button class="btn2"&gt;Add&lt;/button&gt;
+&lt;button type="button" class="btn2" onclick="this.form.reset();document.getElementById('m').classList.remove('open')"&gt;Cancel&lt;/button&gt;
+&lt;/form&gt;&lt;/div&gt;&lt;/div&gt;
+@endsection</code></pre></details>
 <h3 data-ms='5.5 Manage (C7 atas, C8 bawah)'>5.5 Manage (C7 top, C8 bottom)</h3>
-<p data-ms='Atas: muatkan title/description/kategori(teks)/date/status; sahkan required + <span class="mono">in:0,1</span>; Update &rarr; <span class="mono">/my-reports</span>; Reset pulihkan asal. Bawah: thumb segi empat; klik &rarr; fullscreen overlay; X &rarr; <span class="mono">DELETE /photos/{id}</span>; + &rarr; pemilih fail multi auto-upload; drag-drop auto-upload dengan highlight dash biru + <span class="mono">#e0e7ff</span>; thumb baharu ditambah tanpa reload.'>Top: load title/description/kategori(text)/date/status; validate required + <span class="mono">in:0,1</span>; Update &rarr; <span class="mono">/my-reports</span>; Reset restores originals. Bottom: thumbs square; click &rarr; fullscreen overlay; X &rarr; <span class="mono">DELETE /photos/{id}</span>; + &rarr; multi file picker auto-upload; drag-drop auto-upload with blue-dash + <span class="mono">#e0e7ff</span> highlight; new thumbs appended without reload.</p>
-<details class="src"><summary>PhotoController.php + GD resize (~70 lines)</summary><pre><code>// upload($id): owner check; validate photos.* image max 5120;
-//   mkdir public/uploads; per file: name uploads/time_uniqid.ext;
-//   resize(src, dst, 600, 600); Photo::create; return json [{id,path}]
-// del($pid): owner check via report; unlink file; delete; {ok:1}
-// resize: getimagesize; ratio = min(600/w, 600/h, 1) [never upscale];
-//   createfrom jpeg/png/gif/webp; truecolor canvas + alpha for png/webp;
-//   copyresampled; save q85; destroy</code></pre></details>
+<p data-ms='Atas: muatkan title/description/kategori(teks)/date/status; sahkan required + <span class="mono">in:0,1</span>; Update &rarr; <span class="mono">/my-reports</span>; Reset pulihkan asal. Bawah: thumb segi empat; klik &rarr; fullscreen overlay; X &rarr; <span class="mono">DELETE /photos/{id}</span>; + &rarr; pemilih fail multi auto-upload; drag-drop auto-upload dengan highlight dash biru + <span class="mono">#e0e7ff</span>; thumb baharu ditambah tanpa reload. Upload validate photos required + photos.* image max 5120, guard hasFile (elak crash foreach null). Resize GD ratio min(600/w,600/h,1) — fail kecil tidak dibesarkan.'>Top: load title/description/kategori(text)/date/status; validate required + <span class="mono">in:0,1</span>; Update &rarr; <span class="mono">/my-reports</span>; Reset restores originals. Bottom: thumbs square; click &rarr; fullscreen overlay; X &rarr; <span class="mono">DELETE /photos/{id}</span>; + &rarr; multi file picker auto-upload; drag-drop auto-upload with blue-dash + <span class="mono">#e0e7ff</span> highlight; new thumbs appended without reload. Upload validates photos required + photos.* image max 5120, hasFile guard (avoids foreach-null crash). GD resize ratio min(600/w,600/h,1) — small files never upscaled.</p>
+<details class="src"><summary>PhotoController.php — FULL FILE (GD resize, no packages)</summary><pre><code>&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Models\Report;
+use App\Models\Photo;
+
+class PhotoController extends Controller {
+  public function upload(Request $r,$id){
+    $rep = Report::where('id',$id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+    $r-&gt;validate(['photos'=&gt;'required','photos.*'=&gt;'required|image|max:5120']);
+    $out=[];
+    if(!is_dir(public_path('uploads'))) mkdir(public_path('uploads'),0777,true);
+    if(!$r-&gt;hasFile('photos')) return response()-&gt;json($out);
+    foreach($r-&gt;file('photos') as $f){
+      $name = 'uploads/'.time().'_'.uniqid().'.'.$f-&gt;getClientOriginalExtension();
+      $full = public_path($name);
+      $this-&gt;resize($f-&gt;getPathname(),$full,600,600);
+      $ph = Photo::create(['report_id'=&gt;$rep-&gt;id,'path'=&gt;$name]);
+      $out[]=['id'=&gt;$ph-&gt;id,'path'=&gt;$name];
+    }
+    return response()-&gt;json($out);
+  }
+
+  public function del($pid){
+    $ph = Photo::findOrFail($pid);
+    $rep = Report::where('id',$ph-&gt;report_id)-&gt;where('user_id',session('user_id'))-&gt;firstOrFail();
+    if(file_exists(public_path($ph-&gt;path))) unlink(public_path($ph-&gt;path));
+    $ph-&gt;delete();
+    return response()-&gt;json(['ok'=&gt;1]);
+  }
+
+  private function resize($src,$dst,$maxW,$maxH){
+    [$w,$h,$type] = getimagesize($src);
+    $ratio = min($maxW/$w,$maxH/$h,1);
+    $nw=(int)($w*$ratio); $nh=(int)($h*$ratio);
+    switch($type){
+      case IMAGETYPE_JPEG: $s=imagecreatefromjpeg($src); break;
+      case IMAGETYPE_PNG: $s=imagecreatefrompng($src); break;
+      case IMAGETYPE_GIF: $s=imagecreatefromgif($src); break;
+      case IMAGETYPE_WEBP: $s=imagecreatefromwebp($src); break;
+      default: copy($src,$dst); return;
+    }
+    $d=imagecreatetruecolor($nw,$nh);
+    if($type==IMAGETYPE_PNG||$type==IMAGETYPE_WEBP){ imagealphablending($d,false); imagesavealpha($d,true); }
+    imagecopyresampled($d,$s,0,0,0,0,$nw,$nh,$w,$h);
+    switch($type){
+      case IMAGETYPE_JPEG: imagejpeg($d,$dst,85); break;
+      case IMAGETYPE_PNG: imagepng($d,$dst); break;
+      case IMAGETYPE_GIF: imagegif($d,$dst); break;
+      case IMAGETYPE_WEBP: imagewebp($d,$dst,85); break;
+    }
+    imagedestroy($s); imagedestroy($d);
+  }
+}</code></pre></details>
+<details class="src"><summary>manage.blade.php — FULL FILE (top form + AJAX bottom)</summary><pre><code>@extends('layout')
+@section('content')
+&lt;div style="background:#fff;padding:20px;max-width:700px;margin:auto;border-radius:6px"&gt;
+&lt;h3&gt;Manage Report&lt;/h3&gt;&lt;br&gt;
+&lt;form method="POST" action="/manage/{{ $rep-&gt;id }}"&gt;@csrf
+&lt;label&gt;Title :&lt;/label&gt;&lt;input name="title" value="{{ $rep-&gt;title }}" required style="width:100%;padding:6px"&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Description :&lt;/label&gt;&lt;textarea name="description" required style="width:100%;padding:6px"&gt;{{ $rep-&gt;description }}&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Kategori :&lt;/label&gt; {{ $catName }}&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Date :&lt;/label&gt;&lt;input name="date" type="date" value="{{ $rep-&gt;date }}" required style="width:100%;padding:6px"&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Status :&lt;/label&gt;&lt;select name="status" style="width:100%;padding:6px"&gt;
+&lt;option value="0" {{ $rep-&gt;status==0?'selected':'' }}&gt;Public&lt;/option&gt;
+&lt;option value="1" {{ $rep-&gt;status==1?'selected':'' }}&gt;Private&lt;/option&gt;&lt;/select&gt;&lt;br&gt;&lt;br&gt;
+&lt;button class="btn2"&gt;Update&lt;/button&gt;
+&lt;button type="reset" class="btn2"&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+&lt;hr&gt;&lt;br&gt;
+&lt;h4&gt;Report Photos&lt;/h4&gt;&lt;br&gt;
+&lt;div id="plist" style="display:flex;gap:10px;flex-wrap:wrap"&gt;
+@foreach($rep-&gt;photos as $p)
+&lt;div class="wrap" data-id="{{ $p-&gt;id }}"&gt;
+&lt;img src="/{{ $p-&gt;path }}" class="sq" style="cursor:pointer" onclick="openFull('/{{ $p-&gt;path }}')"&gt;
+&lt;button class="xbtn" onclick="delPhoto({{ $p-&gt;id }},this)"&gt;x&lt;/button&gt;
+&lt;/div&gt;
+@endforeach
+&lt;div class="plus" id="plusBtn"&gt;+&lt;/div&gt;
+&lt;/div&gt;
+&lt;input type="file" id="file" multiple accept="image/*" style="display:none"&gt;
+&lt;a href="/my-reports"&gt;&lt;button class="btn2" style="background:#888;margin-top:15px"&gt;Back to Reports&lt;/button&gt;&lt;/a&gt;
+&lt;div id="full" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);justify-content:center;align-items:center" onclick="this.style.display='none'"&gt;
+&lt;img id="fullimg" style="max-width:90%;max-height:90%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+@endsection
+@section('js')
+&lt;script&gt;
+const repId = {{ $rep-&gt;id }};
+const token = document.querySelector('meta[name=csrf-token]').content;
+const plist=document.getElementById('plist'), file=document.getElementById('file'), plus=document.getElementById('plusBtn');
+plus.onclick=()=&gt;file.click();
+file.onchange=()=&gt;upload(file.files);
+['dragover','dragenter'].forEach(e=&gt;plist.addEventListener(e,ev=&gt;{ev.preventDefault();plist.style.outline='3px dashed blue';plist.style.background='#e0e7ff';}));
+['dragleave','drop'].forEach(e=&gt;plist.addEventListener(e,ev=&gt;{ev.preventDefault();plist.style.outline='';plist.style.background='';}));
+plist.addEventListener('drop',ev=&gt;upload(ev.dataTransfer.files));
+function upload(files){
+  if(!files || files.length==0) return;
+  let fd=new FormData();
+  for(let f of files) fd.append('photos[]',f);
+  fetch(`/manage/${repId}/photos`,{method:'POST',headers:{'X-CSRF-TOKEN':token},body:fd})
+  .then(r=&gt;r.json()).then(arr=&gt;{arr.forEach(o=&gt;addThumb(o)); file.value='';});
+}
+function addThumb(o){
+  let d=document.createElement('div');d.className='wrap';d.dataset.id=o.id;
+  d.innerHTML=`&lt;img src="/${o.path}" class="sq" style="cursor:pointer" onclick="openFull('/${o.path}')"&gt;&lt;button class="xbtn" onclick="delPhoto(${o.id},this)"&gt;x&lt;/button&gt;`;
+  plist.insertBefore(d,plus);
+}
+function delPhoto(id,btn){
+  fetch(`/photos/${id}`,{method:'DELETE',headers:{'X-CSRF-TOKEN':token}}).then(()=&gt;btn.closest('.wrap').remove());
+}
+function openFull(src){document.getElementById('fullimg').src=src;document.getElementById('full').style.display='flex';}
+&lt;/script&gt;
+@endsection</code></pre></details>
 <h3 data-ms='5.6 Users (C9, admin sahaja)'>5.6 Users (C9, admin only)</h3>
-<p data-ms='Kawalan <span class="mono">session role != 1 &rarr; /</span>; senarai <span class="mono">role 0</span> sahaja; kategori melalui category_id; <span class="mono">rcount = COUNT reports by user</span>; <span class="mono">pcount = COUNT photos via report ids</span>; Delete unlink fail kemudian padam pengguna (cascade bersihkan baris).'>Guard <span class="mono">session role != 1 &rarr; /</span>; list <span class="mono">role 0</span> only; kategori via category_id; <span class="mono">rcount = COUNT reports by user</span>; <span class="mono">pcount = COUNT photos via report ids</span>; Delete unlinks files then deletes user (cascade clears rows).</p>
+<p data-ms='Kawalan <span class="mono">session role != 1 &rarr; /</span>; senarai <span class="mono">role 0</span> sahaja; kategori melalui category_id; <span class="mono">rcount = COUNT reports by user</span>; <span class="mono">pcount = COUNT photos via report ids</span> (guard isEmpty — elak whereIn kosong); Delete unlink fail kemudian padam pengguna (cascade bersihkan baris).'>Guard <span class="mono">session role != 1 &rarr; /</span>; list <span class="mono">role 0</span> only; kategori via category_id; <span class="mono">rcount = COUNT reports by user</span>; <span class="mono">pcount = COUNT photos via report ids</span> (isEmpty guard — avoids empty whereIn); Delete unlinks files then deletes user (cascade clears rows).</p>
+<details class="src"><summary>UserController.php + users.blade.php — FULL FILES</summary><pre><code>// app/Http/Controllers/UserController.php
+&lt;?php
+namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\Report;
+use App\Models\Category;
+use App\Models\Photo;
+
+class UserController extends Controller {
+  public function index(){
+    if(session('role')!=1) return redirect('/');
+    $users = User::where('role',0)-&gt;get();
+    foreach($users as $u){
+      $u-&gt;cat = $u-&gt;category_id ? Category::find($u-&gt;category_id)-&gt;category_name ?? '-' : '-';
+      $u-&gt;rcount = Report::where('user_id',$u-&gt;id)-&gt;count();
+      $rids = Report::where('user_id',$u-&gt;id)-&gt;pluck('id');
+      $u-&gt;pcount = $rids-&gt;isEmpty() ? 0 : Photo::whereIn('report_id',$rids)-&gt;count();
+    }
+    return view('users',compact('users'));
+  }
+
+  public function destroy($id){
+    if(session('role')!=1) return redirect('/');
+    $u = User::findOrFail($id);
+    foreach(Report::where('user_id',$u-&gt;id)-&gt;with('photos')-&gt;get() as $rep){
+      foreach($rep-&gt;photos as $p){ if(file_exists(public_path($p-&gt;path))) unlink(public_path($p-&gt;path)); }
+    }
+    $u-&gt;delete();
+    return back();
+  }
+}
+
+// resources/views/users.blade.php
+@extends('layout')
+@section('content')
+&lt;div class="box" style="max-width:700px"&gt;
+&lt;h2 style="color:#1e3a8a"&gt;Users&lt;/h2&gt;&lt;br&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Username&lt;/th&gt;&lt;th&gt;Kategori&lt;/th&gt;&lt;th&gt;Reports&lt;/th&gt;&lt;th&gt;Photos&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;
+@foreach($users as $u)&lt;tr&gt;
+&lt;td&gt;{{ $u-&gt;username }}&lt;/td&gt;&lt;td&gt;{{ $u-&gt;cat }}&lt;/td&gt;&lt;td&gt;{{ $u-&gt;rcount }}&lt;/td&gt;&lt;td&gt;{{ $u-&gt;pcount }}&lt;/td&gt;
+&lt;td&gt;&lt;form method="POST" action="/users/{{ $u-&gt;id }}/delete" onsubmit="return confirm('Delete user and all reports?')"&gt;@csrf&lt;button class="btn2"&gt;Delete&lt;/button&gt;&lt;/form&gt;&lt;/td&gt;
+&lt;/tr&gt;@endforeach&lt;/table&gt;&lt;/div&gt;
+@endsection</code></pre></details>
 </section>
 <hr class="sec">
 <section id="s6"><h2 data-ms='6. Route'>6. Routes</h2>
@@ -199,6 +758,37 @@ php artisan migrate</code></pre></details>
 <tr><td>GET</td><td class="mono">/users</td><td>User@index (role 1 only)</td></tr>
 <tr><td>POST</td><td class="mono">/users/{id}/delete</td><td>User@destroy</td></tr>
 </table></div>
+<details class="src"><summary>routes/web.php — FULL FILE (replace whole file)</summary><pre><code>&lt;?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\UserController;
+
+Route::get('/', [AuthController::class,'loginForm']);
+Route::post('/login', [AuthController::class,'login']);
+Route::get('/logout', [AuthController::class,'logout']);
+Route::get('/register', [AuthController::class,'registerForm']);
+Route::post('/register', [AuthController::class,'register']);
+
+Route::get('/reports', [ReportController::class,'index']);
+Route::get('/reports/{id}', [ReportController::class,'show']);
+
+Route::get('/my-reports', [ReportController::class,'my']);
+Route::post('/my-reports', [ReportController::class,'store']);
+Route::post('/my-reports/{id}/delete', [ReportController::class,'destroy']);
+
+Route::get('/manage/{id}', [ReportController::class,'manage']);
+Route::post('/manage/{id}', [ReportController::class,'update']);
+Route::post('/manage/{id}/photos', [PhotoController::class,'upload']);
+Route::delete('/photos/{id}', [PhotoController::class,'del']);
+
+Route::get('/users', [UserController::class,'index']);
+Route::post('/users/{id}/delete', [UserController::class,'destroy']);
+
+// run:
+// New-Item -ItemType Directory -Path "public\uploads" -Force
+// php artisan serve  (http://127.0.0.1:8000)</code></pre></details>
 </section>
 <section id="s7"><h2 data-ms='7. Pengesahan dan pelan tempur'>7. Verification and battle plan</h2>
 <p data-ms='Turutan kerja: 0–30m XAMPP+DB+migrate+seed; 30–90m layout+auth; 90–150m One Page+Slide; 150–210m My Reports+modal+manage atas; 210–300m foto AJAX+resize; 300–330m users; 330–360m simulasi hakim + salin ke folder serahan + eksport DB.'>Work order: 0–30m XAMPP+DB+migrate+seed; 30–90m layout+auth; 90–150m One Page+Slide; 150–210m My Reports+modal+manage top; 210–300m photo AJAX+resize; 300–330m users; 330–360m judge simulation + copy to submit folder + export DB.</p>
@@ -223,11 +813,11 @@ php artisan migrate</code></pre></details>
 <p class="mono" id="vcount">0 / 16 checks</p>
 </section>
 <section id="appendix"><h2 data-ms='Appendix A. Perangkap dan peta fail'>Appendix A. Pitfalls and file map</h2>
-<p data-ms='1. Tiada status hilang C6/C7. 2. <span class="mono">Admin</span> huruf besar A; hash dengan <span class="mono">Hash::make</span>, semak dengan <span class="mono">Hash::check</span>. 3. <span class="mono">SESSION_DRIVER=file</span>. 4. <span class="mono">@csrf</span> + <span class="mono">X-CSRF-TOKEN</span> pada fetch. 5. Cascade dalam migration + unlink manual. 6. <span class="mono">object-fit:cover</span> untuk thumb sahaja. 7. Silap taip kertas: Gallery/Albums/Slide = One Page/Reports. 8. Kategori paparan sahaja dari Category_Id. 9. Input date type=date. 10. Serah ke <span class="mono">C:\xampp\htdocs\YOUR_IC_Module_C</span>.'>1. Missing status loses C6/C7. 2. <span class="mono">Admin</span> capital A; hash with <span class="mono">Hash::make</span>, check with <span class="mono">Hash::check</span>. 3. <span class="mono">SESSION_DRIVER=file</span>. 4. <span class="mono">@csrf</span> + <span class="mono">X-CSRF-TOKEN</span> on fetch. 5. Cascade in migrations + manual unlink. 6. <span class="mono">object-fit:cover</span> for thumbs only. 7. Paper typos: Gallery/Albums/Slide = One Page/Reports. 8. Kategori display-only from Category_Id. 9. Date input type=date. 10. Submit to <span class="mono">C:\xampp\htdocs\YOUR_IC_Module_C</span>.</p>
-<p data-ms='Fail (~17): 8 view (layout, login, register, onepage, slide, myreports, manage, users) + 4 controller (Auth, Report, Photo, User) + routes/web.php + 4 migration + 1 seeder + 4 model + public/uploads.'>Files (~17): 8 views (layout, login, register, onepage, slide, myreports, manage, users) + 4 controllers (Auth, Report, Photo, User) + routes/web.php + 4 migrations + 1 seeder + 4 models + public/uploads.</p>
+<p data-ms='1. Tiada status hilang C6/C7. 2. <span class="mono">Admin</span> huruf besar A; hash dengan <span class="mono">Hash::make</span>, semak dengan <span class="mono">Hash::check</span>. 3. <span class="mono">SESSION_DRIVER=file</span>. 4. <span class="mono">@csrf</span> + <span class="mono">X-CSRF-TOKEN</span> pada fetch. 5. Cascade dalam migration + unlink manual. 6. <span class="mono">object-fit:cover</span> untuk thumb sahaja. 7. Silap taip kertas: Gallery/Albums/Slide = One Page/Reports. 8. Kategori paparan sahaja (disabled) dari Category_Id. 9. Input date type=date. 10. Serah ke <span class="mono">C:\xampp\htdocs\YOUR_IC_Module_C</span>. 11. Padam migration default 0001_* dahulu atau Table users already exists. 12. JANGAN make:seeder DatabaseSeeder dan JANGAN make:model User (kedua-dua file memang dah ada). 13. ReportController paste SEKALI fail lengkap 7-method; jangan overwrite berperingkat. 14. Slide guard 0-foto + Str full namespace + upload hasFile guard + UserController isEmpty guard.'>1. Missing status loses C6/C7. 2. <span class="mono">Admin</span> capital A; hash with <span class="mono">Hash::make</span>, check with <span class="mono">Hash::check</span>. 3. <span class="mono">SESSION_DRIVER=file</span>. 4. <span class="mono">@csrf</span> + <span class="mono">X-CSRF-TOKEN</span> on fetch. 5. Cascade in migrations + manual unlink. 6. <span class="mono">object-fit:cover</span> for thumbs only. 7. Paper typos: Gallery/Albums/Slide = One Page/Reports. 8. Kategori display-only (disabled) from Category_Id. 9. Date input type=date. 10. Submit to <span class="mono">C:\xampp\htdocs\YOUR_IC_Module_C</span>. 11. Delete default 0001_* migrations first or Table users already exists. 12. Do NOT make:seeder DatabaseSeeder and do NOT make:model User (both files already exist). 13. ReportController: paste ONCE the full 7-method file; do not overwrite in stages. 14. Slide empty-guard + Str full namespace + upload hasFile guard + UserController isEmpty guard.</p>
+<p data-ms='Fail (~17): 8 view (layout, login, register, onepage, slide, myreports, manage, users) + 4 controller (Auth, Report, Photo, User) + routes/web.php + 4 migration + 1 seeder + 4 model + public/uploads. Semua kod lengkap dalam blok disclosure S3–S6 di atas, selari dengan panduan bina.'>Files (~17): 8 views (layout, login, register, onepage, slide, myreports, manage, users) + 4 controllers (Auth, Report, Photo, User) + routes/web.php + 4 migrations + 1 seeder + 4 models + public/uploads. All full code is in the S3–S6 disclosure blocks above, aligned with the build guide.</p>
 </section>
 <section id="references"><h2 data-ms='Rujukan'>References</h2>
-<p data-ms='[1] Kertas praktikal Modul C, 12 hlmn. (1784452379_C1 WEB_TECHNOLOGY_FINAL_MODULE C.pdf). [2] Panduan bina lengkap Modul C, 847 baris (KVSkills_Module_C_Complete_Guide.md).'>[1] Module C practical paper, 12 pp. (1784452379_C1 WEB_TECHNOLOGY_FINAL_MODULE C.pdf). [2] Module C complete build guide, 847 lines (KVSkills_Module_C_Complete_Guide.md).</p>
+<p data-ms='[1] Kertas praktikal Modul C, 12 hlmn. (1784452379_C1 WEB_TECHNOLOGY_FINAL_MODULE C.pdf). [2] Panduan bina lengkap Modul C, 1031 baris (KVSkills_Module_C_Complete_Guide.md). Kod dalam halaman ini selari sebijik dengan [2].'>[1] Module C practical paper, 12 pp. (1784452379_C1 WEB_TECHNOLOGY_FINAL_MODULE C.pdf). [2] Module C complete build guide, 1031 lines (KVSkills_Module_C_Complete_Guide.md). Code on this page is aligned line-for-line with [2].</p>
 </section>
 <script>
 (function(){
